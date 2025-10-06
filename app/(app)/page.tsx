@@ -1,10 +1,10 @@
-import { headers } from 'next/headers';
-import { App } from '@/components/app';
+import { FloatingBot } from '@/components/floating-bot';
 import { getAppConfig } from '@/lib/utils';
+import { headers } from 'next/headers';
 
 export default async function Page() {
   const hdrs = await headers();
   const appConfig = await getAppConfig(hdrs);
 
-  return <App appConfig={appConfig} />;
+  return <FloatingBot appConfig={appConfig} />;
 }

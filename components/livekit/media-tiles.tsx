@@ -1,20 +1,22 @@
-import React, { useMemo } from 'react';
-import { Track } from 'livekit-client';
-import { AnimatePresence, motion } from 'motion/react';
+import { cn } from '@/lib/utils';
 import {
   type TrackReference,
   useLocalParticipant,
   useTracks,
   useVoiceAssistant,
 } from '@livekit/components-react';
-import { cn } from '@/lib/utils';
+import { Track } from 'livekit-client';
+import { AnimatePresence, motion } from 'motion/react';
+import { useMemo } from 'react';
 import { AgentTile } from './agent-tile';
 import { AvatarTile } from './avatar-tile';
+import { StaticAvatar } from './static-avatar';
 import { VideoTile } from './video-tile';
 
 const MotionVideoTile = motion.create(VideoTile);
 const MotionAgentTile = motion.create(AgentTile);
 const MotionAvatarTile = motion.create(AvatarTile);
+const MotionStaticAvatar = motion.create(StaticAvatar);
 
 const animationProps = {
   initial: {
@@ -88,9 +90,10 @@ export function useLocalTrackRef(source: Track.Source) {
 
 interface MediaTilesProps {
   chatOpen: boolean;
+  isPopupMode?: boolean;
 }
 
-export function MediaTiles({ chatOpen }: MediaTilesProps) {
+export function MediaTiles({ chatOpen, isPopupMode = false }: MediaTilesProps) {
   const {
     state: agentState,
     audioTrack: agentAudioTrack,
@@ -121,6 +124,85 @@ export function MediaTiles({ chatOpen }: MediaTilesProps) {
 
   const isAvatar = agentVideoTrack !== undefined;
 
+  // Popup Mode Rendering
+  if (isPopupMode) {
+    return (
+      <AnimatePresence mode="wait">
+        {!isAvatar && (
+          // Static avatar for audio-only agent in popup mode
+          <MotionStaticAvatar
+            key="avatar-popup"
+            layout
+            layoutId="avatar-popup"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{
+              layout: {
+                type: 'spring',
+                stiffness: 300,
+                damping: 30,
+              },
+              opacity: { duration: 0.3 },
+              scale: { duration: 0.3 },
+            }}
+            state={agentState}
+            className={cn(
+              'overflow-hidden rounded-full',
+              chatOpen ? 'h-32 w-32' : 'h-64 w-64'
+            )}
+          />
+        )}
+        {isAvatar && (
+          // avatar agent
+          <MotionAvatarTile
+            key="avatar-popup"
+            layout
+            layoutId="avatar-popup"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{
+              layout: {
+                type: 'spring',
+                stiffness: 300,
+                damping: 30,
+              },
+              opacity: { duration: 0.3 },
+              scale: { duration: 0.3 },
+            }}
+            videoTrack={agentVideoTrack}
+            className={cn(
+              'overflow-hidden rounded-full',
+              chatOpen
+                ? 'h-32 w-32 [&>video]:h-32 [&>video]:w-32 [&>video]:object-cover'
+                : 'h-64 w-64 [&>video]:h-64 [&>video]:w-64 [&>video]:object-cover'
+            )}
+          />
+        )}
+        {/* Camera in popup mode - show as small circle when chat is closed */}
+        {cameraTrack && isCameraEnabled && !chatOpen && (
+          <MotionVideoTile
+            key="camera-popup"
+            layout="position"
+            layoutId="camera-popup"
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0 }}
+            trackRef={cameraTrack}
+            transition={{
+              type: 'spring',
+              stiffness: 400,
+              damping: 35,
+            }}
+            className="absolute left-4 bottom-4 h-16 w-16 overflow-hidden rounded-full"
+          />
+        )}
+      </AnimatePresence>
+    );
+  }
+
+  // Full Page Mode Rendering
   return (
     <div className="pointer-events-none fixed inset-x-0 top-8 bottom-32 z-50 md:top-12 md:bottom-40">
       <div className="relative mx-auto h-full max-w-2xl px-4 md:px-0">

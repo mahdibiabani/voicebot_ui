@@ -1,13 +1,14 @@
-import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { useEffect, useRef, useState } from 'react';
 
-interface ChatInputProps extends React.HTMLAttributes<HTMLFormElement> {
+interface ChatInputProps extends Omit<React.HTMLAttributes<HTMLFormElement>, 'onInput'> {
   onSend?: (message: string) => void;
   disabled?: boolean;
+  onInput?: (hasText: boolean) => void;
 }
 
-export function ChatInput({ onSend, className, disabled, ...props }: ChatInputProps) {
+export function ChatInput({ onSend, className, disabled, onInput, ...props }: ChatInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState<string>('');
 
@@ -16,6 +17,12 @@ export function ChatInput({ onSend, className, disabled, ...props }: ChatInputPr
     props.onSubmit?.(e);
     onSend?.(message);
     setMessage('');
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    setMessage(newValue);
+    onInput?.(newValue.length > 0);
   };
 
   const isDisabled = disabled || message.trim().length === 0;
@@ -39,7 +46,7 @@ export function ChatInput({ onSend, className, disabled, ...props }: ChatInputPr
         value={message}
         disabled={disabled}
         placeholder="Type something..."
-        onChange={(e) => setMessage(e.target.value)}
+        onChange={handleChange}
         className="flex-1 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
       />
       <Button

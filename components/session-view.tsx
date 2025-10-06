@@ -1,13 +1,5 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'motion/react';
-import {
-  type AgentState,
-  type ReceivedChatMessage,
-  useRoomContext,
-  useVoiceAssistant,
-} from '@livekit/components-react';
 import { toastAlert } from '@/components/alert-toast';
 import { AgentControlBar } from '@/components/livekit/agent-control-bar/agent-control-bar';
 import { ChatEntry } from '@/components/livekit/chat/chat-entry';
@@ -17,6 +9,14 @@ import useChatAndTranscription from '@/hooks/useChatAndTranscription';
 import { useDebugMode } from '@/hooks/useDebug';
 import type { AppConfig } from '@/lib/types';
 import { cn } from '@/lib/utils';
+import {
+  type AgentState,
+  type ReceivedChatMessage,
+  useRoomContext,
+  useVoiceAssistant,
+} from '@livekit/components-react';
+import { AnimatePresence, motion } from 'motion/react';
+import React, { useEffect, useState } from 'react';
 
 function isAgentAvailable(agentState: AgentState) {
   return agentState == 'listening' || agentState == 'thinking' || agentState == 'speaking';
@@ -26,18 +26,23 @@ interface SessionViewProps {
   appConfig: AppConfig;
   disabled: boolean;
   sessionStarted: boolean;
+  isPopupMode?: boolean;
 }
 
 export const SessionView = ({
   appConfig,
   disabled,
   sessionStarted,
+  isPopupMode = false,
   ref,
 }: React.ComponentProps<'div'> & SessionViewProps) => {
   const { state: agentState } = useVoiceAssistant();
   const [chatOpen, setChatOpen] = useState(false);
   const { messages, send } = useChatAndTranscription();
   const room = useRoomContext();
+
+  // Track if user is speaking (agent is listening)
+  const isUserSpeaking = agentState === 'listening';
 
   useDebugMode({
     enabled: process.env.NODE_END !== 'production',
@@ -46,6 +51,13 @@ export const SessionView = ({
   async function handleSendMessage(message: string) {
     await send(message);
   }
+
+  // When user speaks, close chat mode to show centered waveform
+  useEffect(() => {
+    if (isPopupMode && chatOpen && isUserSpeaking) {
+      setChatOpen(false);
+    }
+  }, [isUserSpeaking, isPopupMode, chatOpen]);
 
   useEffect(() => {
     if (sessionStarted) {
@@ -87,6 +99,109 @@ export const SessionView = ({
     supportsVideoInput,
     supportsScreenShare,
   };
+
+  if (isPopupMode) {
+    return (
+      <section
+        ref={ref}
+        inert={disabled}
+        className="relative flex h-full w-full flex-col overflow-hidden"
+      >
+        {/* Content Area */}
+        <div className="relative flex flex-1 flex-col overflow-hidden">
+          {/* Chat Messages - only shown when chatOpen */}
+          <AnimatePresence>
+            {chatOpen && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="absolute inset-0 z-30 flex flex-col bg-background"
+              >
+                <ChatMessageView className="flex-1 overflow-y-auto px-4 pt-4 pb-2">
+                  <div className="space-y-3 whitespace-pre-wrap">
+                    <AnimatePresence>
+                      {messages.map((message: ReceivedChatMessage) => (
+                        <motion.div
+                          key={message.id}
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 1, height: 'auto', translateY: 0.001 }}
+                          transition={{ duration: 0.5, ease: 'easeOut' }}
+                        >
+                          <ChatEntry hideName key={message.id} entry={message} />
+                        </motion.div>
+                      ))}
+                    </AnimatePresence>
+                  </div>
+                </ChatMessageView>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Agent Tile - smoothly transitions between center and corner */}
+          <motion.div
+            className="absolute z-50"
+            initial={false}
+            animate={{
+              left: chatOpen ? 'calc(100% - 144px)' : '50%',
+              top: chatOpen ? 'calc(100% - 144px)' : '50%',
+              x: chatOpen ? 0 : '-50%',
+              y: chatOpen ? 0 : '-50%',
+            }}
+            transition={{
+              type: 'spring',
+              stiffness: 260,
+              damping: 28,
+              mass: 0.8,
+            }}
+          >
+            <MediaTiles chatOpen={chatOpen} isPopupMode={isPopupMode} />
+          </motion.div>
+
+          {/* Helper text - only shown when not in chat mode */}
+          {!chatOpen && appConfig.isPreConnectBufferEnabled && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: sessionStarted && messages.length === 0 ? 1 : 0,
+                transition: {
+                  ease: 'easeIn',
+                  delay: messages.length > 0 ? 0 : 0.8,
+                  duration: messages.length > 0 ? 0.2 : 0.5,
+                },
+              }}
+              aria-hidden={messages.length > 0}
+              className="absolute bottom-4 left-0 right-0 z-10 text-center text-xs text-muted-foreground"
+            >
+              <p className="animate-text-shimmer inline-block !bg-clip-text font-semibold text-transparent">
+                Agent is listening, ask it a question or type below
+              </p>
+            </motion.div>
+          )}
+        </div>
+
+        {/* Control Bar - Always at Bottom */}
+        <motion.div
+          key="control-bar"
+          initial={{ opacity: 0, translateY: '100%' }}
+          animate={{
+            opacity: sessionStarted ? 1 : 0,
+            translateY: sessionStarted ? '0%' : '100%',
+          }}
+          transition={{ duration: 0.3, delay: sessionStarted ? 0.5 : 0, ease: 'easeOut' }}
+          className="relative border-t border-border bg-background p-3"
+        >
+          <AgentControlBar
+            capabilities={capabilities}
+            onChatOpenChange={setChatOpen}
+            onSendMessage={handleSendMessage}
+          />
+        </motion.div>
+      </section>
+    );
+  }
 
   return (
     <section

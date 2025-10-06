@@ -1,22 +1,21 @@
 'use client';
 
-import * as React from 'react';
-import { useCallback } from 'react';
-import { Track } from 'livekit-client';
-import { BarVisualizer, useRemoteParticipants } from '@livekit/components-react';
-import { ChatTextIcon, PhoneDisconnectIcon } from '@phosphor-icons/react/dist/ssr';
 import { ChatInput } from '@/components/livekit/chat/chat-input';
 import { Button } from '@/components/ui/button';
-import { Toggle } from '@/components/ui/toggle';
 import { AppConfig } from '@/lib/types';
 import { cn } from '@/lib/utils';
+import { BarVisualizer, useRemoteParticipants } from '@livekit/components-react';
+import { PhoneDisconnectIcon } from '@phosphor-icons/react/dist/ssr';
+import { Track } from 'livekit-client';
+import * as React from 'react';
+import { useCallback } from 'react';
 import { DeviceSelect } from '../device-select';
 import { TrackToggle } from '../track-toggle';
 import { UseAgentControlBarProps, useAgentControlBar } from './hooks/use-agent-control-bar';
 
 export interface AgentControlBarProps
   extends React.HTMLAttributes<HTMLDivElement>,
-    UseAgentControlBarProps {
+  UseAgentControlBarProps {
   capabilities: Pick<AppConfig, 'supportsChatInput' | 'supportsVideoInput' | 'supportsScreenShare'>;
   onChatOpenChange?: (open: boolean) => void;
   onSendMessage?: (message: string) => Promise<void>;
@@ -43,7 +42,7 @@ export function AgentControlBar({
   const [isSendingMessage, setIsSendingMessage] = React.useState(false);
 
   const isAgentAvailable = participants.some((p) => p.isAgent);
-  const isInputDisabled = !chatOpen || !isAgentAvailable || isSendingMessage;
+  const isInputDisabled = isSendingMessage; // Allow typing even before agent connects
 
   const [isDisconnecting, setIsDisconnecting] = React.useState(false);
 
@@ -77,6 +76,12 @@ export function AgentControlBar({
     onDisconnect?.();
   };
 
+  const handleChatInput = (hasText: boolean) => {
+    if (hasText && !chatOpen) {
+      setChatOpen(true);
+    }
+  };
+
   React.useEffect(() => {
     onChatOpenChange?.(chatOpen);
   }, [chatOpen, onChatOpenChange]);
@@ -104,15 +109,14 @@ export function AgentControlBar({
       {...props}
     >
       {capabilities.supportsChatInput && (
-        <div
-          inert={!chatOpen}
-          className={cn(
-            'overflow-hidden transition-[height] duration-300 ease-out',
-            chatOpen ? 'h-[57px]' : 'h-0'
-          )}
-        >
+        <div className="mb-3">
           <div className="flex h-8 w-full">
-            <ChatInput onSend={handleSendMessage} disabled={isInputDisabled} className="w-full" />
+            <ChatInput
+              onSend={handleSendMessage}
+              disabled={isInputDisabled}
+              className="w-full"
+              onInput={handleChatInput}
+            />
           </div>
           <hr className="border-bg2 my-3" />
         </div>
@@ -205,18 +209,6 @@ export function AgentControlBar({
             </div>
           )}
 
-          {visibleControls.chat && (
-            <Toggle
-              variant="secondary"
-              aria-label="Toggle chat"
-              pressed={chatOpen}
-              onPressedChange={setChatOpen}
-              disabled={!isAgentAvailable}
-              className="aspect-square h-full"
-            >
-              <ChatTextIcon weight="bold" />
-            </Toggle>
-          )}
         </div>
         {visibleControls.leave && (
           <Button
