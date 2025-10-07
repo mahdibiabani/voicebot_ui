@@ -6,10 +6,23 @@ import { cn } from '@/lib/utils';
 export function useAutoScroll(scrollContentContainerRef: RefObject<Element | null>) {
   useEffect(() => {
     function scrollToBottom() {
-      const { scrollingElement } = document;
-
-      if (scrollingElement) {
-        scrollingElement.scrollTop = scrollingElement.scrollHeight;
+      if (scrollContentContainerRef.current) {
+        // Find the scrollable parent container
+        let scrollableParent = scrollContentContainerRef.current.parentElement;
+        while (scrollableParent) {
+          const overflowY = window.getComputedStyle(scrollableParent).overflowY;
+          if (overflowY === 'auto' || overflowY === 'scroll') {
+            scrollableParent.scrollTop = scrollableParent.scrollHeight;
+            return;
+          }
+          scrollableParent = scrollableParent.parentElement;
+        }
+        
+        // Fallback to document scrolling if no scrollable parent found
+        const { scrollingElement } = document;
+        if (scrollingElement) {
+          scrollingElement.scrollTop = scrollingElement.scrollHeight;
+        }
       }
     }
 

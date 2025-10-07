@@ -25,7 +25,7 @@ export const ChatEntry = ({
   const { message, hasBeenEdited, time, locale, name } = useChatMessage(entry, messageFormatter);
 
   const isUser = entry.from?.isLocal ?? false;
-  const messageOrigin = isUser ? 'remote' : 'local';
+  const messageOrigin = isUser ? 'local' : 'remote';
 
   return (
     <li
@@ -47,7 +47,12 @@ export const ChatEntry = ({
         </span>
       )}
 
-      <span className={cn('max-w-4/5 rounded-[20px] p-2', isUser ? 'bg-muted ml-auto' : 'mr-auto')}>
+      <span className={cn(
+        'max-w-[75%] rounded-[20px] px-4 py-2',
+        isUser 
+          ? 'bg-primary text-primary-foreground ml-auto' 
+          : 'bg-muted text-foreground mr-auto'
+      )}>
         {message}
       </span>
     </li>
