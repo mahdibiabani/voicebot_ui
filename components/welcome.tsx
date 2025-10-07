@@ -1,16 +1,24 @@
 import { Button } from '@/components/ui/button';
+import { VoiceSelector } from '@/components/voice-selector';
 import { cn } from '@/lib/utils';
+import type { TTSVoice } from '@/lib/types';
 
 interface WelcomeProps {
   disabled: boolean;
   startButtonText: string;
   onStartCall: () => void;
+  ttsVoices?: TTSVoice[];
+  selectedVoice?: string;
+  onVoiceChange?: (voiceId: string) => void;
 }
 
 export const Welcome = ({
   disabled,
   startButtonText,
   onStartCall,
+  ttsVoices = [],
+  selectedVoice = '',
+  onVoiceChange,
   ref,
 }: React.ComponentProps<'div'> & WelcomeProps) => {
   return (
@@ -39,6 +47,18 @@ export const Welcome = ({
       <p className="text-fg1 max-w-prose pt-1 leading-6 font-medium">
         Chat live with your voice AI agent
       </p>
+      
+      {ttsVoices.length > 0 && onVoiceChange && (
+        <div className="mt-6 flex flex-col items-center gap-3">
+          <VoiceSelector
+            voices={ttsVoices}
+            selectedVoice={selectedVoice}
+            onVoiceChange={onVoiceChange}
+            disabled={disabled}
+          />
+        </div>
+      )}
+      
       <Button variant="primary" size="lg" onClick={onStartCall} className="mt-6 w-64 font-mono">
         {startButtonText}
       </Button>

@@ -27,6 +27,8 @@ interface SessionViewProps {
   disabled: boolean;
   sessionStarted: boolean;
   isPopupMode?: boolean;
+  selectedVoice?: string;
+  onVoiceChange?: (voice: string) => void;
 }
 
 export const SessionView = ({
@@ -34,6 +36,8 @@ export const SessionView = ({
   disabled,
   sessionStarted,
   isPopupMode = false,
+  selectedVoice,
+  onVoiceChange,
   ref,
 }: React.ComponentProps<'div'> & SessionViewProps) => {
   const { state: agentState } = useVoiceAssistant();

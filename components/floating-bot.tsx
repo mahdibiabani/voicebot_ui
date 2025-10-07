@@ -20,6 +20,7 @@ export function FloatingBot({ appConfig }: FloatingBotProps) {
     const room = useMemo(() => new Room(), []);
     const [isOpen, setIsOpen] = useState(false);
     const [sessionStarted, setSessionStarted] = useState(false);
+    const [selectedVoice, setSelectedVoice] = useState(appConfig.defaultTTSVoice || '');
     const { refreshConnectionDetails, existingOrRefreshConnectionDetails } =
         useConnectionDetails(appConfig);
 
@@ -69,6 +70,20 @@ export function FloatingBot({ appConfig }: FloatingBotProps) {
             room.disconnect();
         };
     }, [room, sessionStarted, appConfig.isPreConnectBufferEnabled, existingOrRefreshConnectionDetails]);
+
+    // Send voice selection to agent when session starts
+    useEffect(() => {
+        if (sessionStarted && room.state === 'connected' && selectedVoice) {
+            // Send voice configuration to agent via data message
+            room.localParticipant.publishData(
+                JSON.stringify({
+                    type: 'voice_config',
+                    voice: selectedVoice
+                }),
+                { reliable: true }
+            );
+        }
+    }, [sessionStarted, room.state, selectedVoice, room.localParticipant]);
 
     const handleToggle = () => {
         if (!isOpen) {
@@ -198,6 +213,8 @@ export function FloatingBot({ appConfig }: FloatingBotProps) {
                                     disabled={!sessionStarted}
                                     sessionStarted={sessionStarted}
                                     isPopupMode={true}
+                                    selectedVoice={selectedVoice}
+                                    onVoiceChange={setSelectedVoice}
                                 />
                             </RoomContext.Provider>
                         </motion.div>

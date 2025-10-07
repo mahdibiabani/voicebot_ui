@@ -21,6 +21,7 @@ interface AppProps {
 export function App({ appConfig }: AppProps) {
   const room = useMemo(() => new Room(), []);
   const [sessionStarted, setSessionStarted] = useState(false);
+  const [selectedVoice, setSelectedVoice] = useState(appConfig.defaultTTSVoice || '');
   const { refreshConnectionDetails, existingOrRefreshConnectionDetails } =
     useConnectionDetails(appConfig);
 
@@ -75,7 +76,21 @@ export function App({ appConfig }: AppProps) {
     };
   }, [room, sessionStarted, appConfig.isPreConnectBufferEnabled]);
 
-  const { startButtonText } = appConfig;
+  const { startButtonText, ttsVoices } = appConfig;
+
+  // Send voice selection to agent when session starts
+  useEffect(() => {
+    if (sessionStarted && room.state === 'connected' && selectedVoice) {
+      // Send voice configuration to agent via data message
+      room.localParticipant.publishData(
+        JSON.stringify({
+          type: 'voice_config',
+          voice: selectedVoice
+        }),
+        { reliable: true }
+      );
+    }
+  }, [sessionStarted, room.state, selectedVoice, room.localParticipant]);
 
   return (
     <main>
@@ -84,6 +99,9 @@ export function App({ appConfig }: AppProps) {
         startButtonText={startButtonText}
         onStartCall={() => setSessionStarted(true)}
         disabled={sessionStarted}
+        ttsVoices={ttsVoices}
+        selectedVoice={selectedVoice}
+        onVoiceChange={setSelectedVoice}
         initial={{ opacity: 1 }}
         animate={{ opacity: sessionStarted ? 0 : 1 }}
         transition={{ duration: 0.5, ease: 'linear', delay: sessionStarted ? 0 : 0.5 }}
@@ -98,6 +116,8 @@ export function App({ appConfig }: AppProps) {
           appConfig={appConfig}
           disabled={!sessionStarted}
           sessionStarted={sessionStarted}
+          selectedVoice={selectedVoice}
+          onVoiceChange={setSelectedVoice}
           initial={{ opacity: 0 }}
           animate={{ opacity: sessionStarted ? 1 : 0 }}
           transition={{
