@@ -25,6 +25,14 @@ export interface AppConfig {
 
   sandboxId?: string;
   agentName?: string;
+  ttsVoices?: TTSVoice[];
+  defaultTTSVoice?: string;
+}
+
+export interface TTSVoice {
+  id: string;
+  name: string;
+  description?: string;
 }
 
 export interface SandboxConfig {
