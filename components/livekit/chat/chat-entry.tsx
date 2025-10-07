@@ -1,6 +1,6 @@
-import * as React from 'react';
-import type { MessageFormatter, ReceivedChatMessage } from '@livekit/components-react';
 import { cn } from '@/lib/utils';
+import type { MessageFormatter, ReceivedChatMessage } from '@livekit/components-react';
+import * as React from 'react';
 import { useChatMessage } from './hooks/utils';
 
 export interface ChatEntryProps extends React.HTMLAttributes<HTMLLIElement> {
@@ -47,12 +47,7 @@ export const ChatEntry = ({
         </span>
       )}
 
-      <span className={cn(
-        'max-w-[75%] rounded-[20px] px-4 py-2',
-        isUser 
-          ? 'bg-primary text-primary-foreground ml-auto' 
-          : 'bg-muted text-foreground mr-auto'
-      )}>
+      <span className={cn('max-w-4/5 rounded-[20px] p-2', isUser ? 'bg-blue-100 dark:bg-blue-900 text-sm' : 'bg-gray-200 dark:bg-gray-700 text-base')}>
         {message}
       </span>
     </li>

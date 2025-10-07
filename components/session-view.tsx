@@ -42,11 +42,105 @@ export const SessionView = ({
 }: React.ComponentProps<'div'> & SessionViewProps) => {
   const { state: agentState } = useVoiceAssistant();
   const [chatOpen, setChatOpen] = useState(false);
-  const { messages, send } = useChatAndTranscription();
+  const { messages: liveMessages, send } = useChatAndTranscription();
   const room = useRoomContext();
+
+  // Mock data for testing UI (remove in production)
+  const mockMessages: ReceivedChatMessage[] = [
+    {
+      id: 'mock-1',
+      timestamp: Date.now() - 60000,
+      message: 'Hello! How can I help you today?',
+      from: {
+        identity: 'agent',
+        name: 'AI Assistant',
+        isLocal: false,
+      } as any,
+    },
+    {
+      id: 'mock-2',
+      timestamp: Date.now() - 50000,
+      message: 'Hi! I would like to know more about your services.',
+      from: {
+        identity: 'user',
+        name: 'User',
+        isLocal: true,
+      } as any,
+    },
+    {
+      id: 'mock-3',
+      timestamp: Date.now() - 40000,
+      message: 'Great question! We offer a variety of AI-powered voice assistance services. What specific area are you interested in?',
+      from: {
+        identity: 'agent',
+        name: 'AI Assistant',
+        isLocal: false,
+      } as any,
+    },
+    {
+      id: 'mock-4',
+      timestamp: Date.now() - 30000,
+      message: 'I\'m interested in voice recognition and transcription features.',
+      from: {
+        identity: 'user',
+        name: 'User',
+        isLocal: true,
+      } as any,
+    },
+    {
+      id: 'mock-5',
+      timestamp: Date.now() - 20000,
+      message: '[TRANSCRIPTION] Can you also tell me about real-time speech processing?',
+      from: {
+        identity: 'user',
+        name: 'User',
+        isLocal: true,
+      } as any,
+    },
+    {
+      id: 'mock-6',
+      timestamp: Date.now() - 10000,
+      message: 'Absolutely! Our real-time speech processing uses advanced machine learning models to transcribe and understand speech with high accuracy. It supports multiple languages and can handle various accents. The system processes audio in near real-time with minimal latency.',
+      from: {
+        identity: 'agent',
+        name: 'AI Assistant',
+        isLocal: false,
+      } as any,
+    },
+    {
+      id: 'mock-7',
+      timestamp: Date.now() - 5000,
+      message: '[TRANSCRIPTION] That sounds amazing! What about pricing?',
+      from: {
+        identity: 'user',
+        name: 'User',
+        isLocal: true,
+      } as any,
+    },
+    {
+      id: 'mock-8',
+      timestamp: Date.now() - 2000,
+      message: 'We offer flexible pricing plans to suit different needs. You can choose from pay-as-you-go options or monthly subscriptions. Would you like me to send you detailed pricing information?',
+      from: {
+        identity: 'agent',
+        name: 'AI Assistant',
+        isLocal: false,
+      } as any,
+    },
+  ];
+
+  // Use mock data for preview, real messages otherwise
+  const messages = liveMessages.length > 0 ? liveMessages : mockMessages;
 
   // Track if user is speaking (agent is listening)
   const isUserSpeaking = agentState === 'listening';
+
+  // Auto-open chat when there are mock messages for preview
+  useEffect(() => {
+    if (sessionStarted && messages.length > 0 && liveMessages.length === 0) {
+      setChatOpen(true);
+    }
+  }, [sessionStarted, messages.length, liveMessages.length]);
 
   useDebugMode({
     enabled: process.env.NODE_END !== 'production',
