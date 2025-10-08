@@ -151,8 +151,8 @@ export const SessionView = ({
             className="absolute z-50"
             initial={false}
             animate={{
-              left: chatOpen ? 'calc(100% - 144px)' : '50%',
-              top: chatOpen ? 'calc(100% - 144px)' : '50%',
+              left: chatOpen ? 'calc(100% - 208px)' : '50%',
+              top: chatOpen ? 'calc(100% - 208px)' : '50%',
               x: chatOpen ? 0 : '-50%',
               y: chatOpen ? 0 : '-50%',
             }}

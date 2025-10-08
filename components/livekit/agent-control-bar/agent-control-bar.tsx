@@ -186,7 +186,7 @@ export function AgentControlBar({
           )}
 
           {visibleControls.chat && (
-            <Tooltip content="History" side="top">
+            <Tooltip content="Chat History" side="top">
               <Toggle
                 variant="secondary"
                 aria-label="Toggle chat"
