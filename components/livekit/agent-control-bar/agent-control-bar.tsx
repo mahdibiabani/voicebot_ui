@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { Toggle } from '@/components/ui/toggle';
+import { Tooltip } from '@/components/ui/tooltip';
 import { AppConfig } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { BarVisualizer, useRemoteParticipants } from '@livekit/components-react';
@@ -94,101 +95,109 @@ export function AgentControlBar({
       <div className="flex flex-row justify-between gap-1">
         <div className="flex gap-1">
           {visibleControls.microphone && (
-            <div className="flex items-center gap-0">
-              <TrackToggle
-                variant="primary"
-                source={Track.Source.Microphone}
-                pressed={microphoneToggle.enabled}
-                disabled={microphoneToggle.pending}
-                onPressedChange={microphoneToggle.toggle}
-                className="peer/track group/track relative w-auto pr-3 pl-3 md:rounded-r-none md:border-r-0 md:pr-2"
-              >
-                <BarVisualizer
-                  barCount={3}
-                  trackRef={micTrackRef}
-                  options={{ minHeight: 5 }}
-                  className="flex h-full w-auto items-center justify-center gap-0.5"
+            <Tooltip content="Microphone" side="top">
+              <div className="flex items-center gap-0">
+                <TrackToggle
+                  variant="primary"
+                  source={Track.Source.Microphone}
+                  pressed={microphoneToggle.enabled}
+                  disabled={microphoneToggle.pending}
+                  onPressedChange={microphoneToggle.toggle}
+                  className="peer/track group/track relative w-auto pr-3 pl-3 md:rounded-r-none md:border-r-0 md:pr-2"
                 >
-                  <span
-                    className={cn([
-                      'h-full w-0.5 origin-center rounded-2xl',
-                      'group-data-[state=on]/track:bg-fg1 group-data-[state=off]/track:bg-destructive-foreground',
-                      'data-lk-muted:bg-muted',
-                    ])}
-                  ></span>
-                </BarVisualizer>
-              </TrackToggle>
-              <hr className="bg-separator1 peer-data-[state=off]/track:bg-separatorSerious relative z-10 -mr-px hidden h-4 w-px md:block" />
-              <DeviceSelect
-                size="sm"
-                kind="audioinput"
-                requestPermissions={false}
-                onMediaDeviceError={onMicrophoneDeviceSelectError}
-                onActiveDeviceChange={handleAudioDeviceChange}
-                className={cn([
-                  'pl-2',
-                  'peer-data-[state=off]/track:text-destructive-foreground',
-                  'hover:text-fg1 focus:text-fg1',
-                  'hover:peer-data-[state=off]/track:text-destructive-foreground focus:peer-data-[state=off]/track:text-destructive-foreground',
-                  'hidden rounded-l-none md:block',
-                ])}
-              />
-            </div>
+                  <BarVisualizer
+                    barCount={3}
+                    trackRef={micTrackRef}
+                    options={{ minHeight: 5 }}
+                    className="flex h-full w-auto items-center justify-center gap-0.5"
+                  >
+                    <span
+                      className={cn([
+                        'h-full w-0.5 origin-center rounded-2xl',
+                        'group-data-[state=on]/track:bg-fg1 group-data-[state=off]/track:bg-destructive-foreground',
+                        'data-lk-muted:bg-muted',
+                      ])}
+                    ></span>
+                  </BarVisualizer>
+                </TrackToggle>
+                <hr className="bg-separator1 peer-data-[state=off]/track:bg-separatorSerious relative z-10 -mr-px hidden h-4 w-px md:block" />
+                <DeviceSelect
+                  size="sm"
+                  kind="audioinput"
+                  requestPermissions={false}
+                  onMediaDeviceError={onMicrophoneDeviceSelectError}
+                  onActiveDeviceChange={handleAudioDeviceChange}
+                  className={cn([
+                    'pl-2',
+                    'peer-data-[state=off]/track:text-destructive-foreground',
+                    'hover:text-fg1 focus:text-fg1',
+                    'hover:peer-data-[state=off]/track:text-destructive-foreground focus:peer-data-[state=off]/track:text-destructive-foreground',
+                    'hidden rounded-l-none md:block',
+                  ])}
+                />
+              </div>
+            </Tooltip>
           )}
 
           {capabilities.supportsVideoInput && visibleControls.camera && (
-            <div className="flex items-center gap-0">
-              <TrackToggle
-                variant="primary"
-                source={Track.Source.Camera}
-                pressed={cameraToggle.enabled}
-                pending={cameraToggle.pending}
-                disabled={cameraToggle.pending}
-                onPressedChange={cameraToggle.toggle}
-                className="peer/track relative w-auto rounded-r-none pr-3 pl-3 disabled:opacity-100 md:border-r-0 md:pr-2"
-              />
-              <hr className="bg-separator1 peer-data-[state=off]/track:bg-separatorSerious relative z-10 -mr-px hidden h-4 w-px md:block" />
-              <DeviceSelect
-                size="sm"
-                kind="videoinput"
-                requestPermissions={false}
-                onMediaDeviceError={onCameraDeviceSelectError}
-                onActiveDeviceChange={handleVideoDeviceChange}
-                className={cn([
-                  'pl-2',
-                  'peer-data-[state=off]/track:text-destructive-foreground',
-                  'hover:text-fg1 focus:text-fg1',
-                  'hover:peer-data-[state=off]/track:text-destructive-foreground focus:peer-data-[state=off]/track:text-destructive-foreground',
-                  'rounded-l-none',
-                ])}
-              />
-            </div>
+            <Tooltip content="Camera" side="top">
+              <div className="flex items-center gap-0">
+                <TrackToggle
+                  variant="primary"
+                  source={Track.Source.Camera}
+                  pressed={cameraToggle.enabled}
+                  pending={cameraToggle.pending}
+                  disabled={cameraToggle.pending}
+                  onPressedChange={cameraToggle.toggle}
+                  className="peer/track relative w-auto rounded-r-none pr-3 pl-3 disabled:opacity-100 md:border-r-0 md:pr-2"
+                />
+                <hr className="bg-separator1 peer-data-[state=off]/track:bg-separatorSerious relative z-10 -mr-px hidden h-4 w-px md:block" />
+                <DeviceSelect
+                  size="sm"
+                  kind="videoinput"
+                  requestPermissions={false}
+                  onMediaDeviceError={onCameraDeviceSelectError}
+                  onActiveDeviceChange={handleVideoDeviceChange}
+                  className={cn([
+                    'pl-2',
+                    'peer-data-[state=off]/track:text-destructive-foreground',
+                    'hover:text-fg1 focus:text-fg1',
+                    'hover:peer-data-[state=off]/track:text-destructive-foreground focus:peer-data-[state=off]/track:text-destructive-foreground',
+                    'rounded-l-none',
+                  ])}
+                />
+              </div>
+            </Tooltip>
           )}
 
           {capabilities.supportsScreenShare && visibleControls.screenShare && (
-            <div className="flex items-center gap-0">
-              <TrackToggle
-                variant="secondary"
-                source={Track.Source.ScreenShare}
-                pressed={screenShareToggle.enabled}
-                disabled={screenShareToggle.pending}
-                onPressedChange={screenShareToggle.toggle}
-                className="relative w-auto"
-              />
-            </div>
+            <Tooltip content="Share your desktop" side="top">
+              <div className="flex items-center gap-0">
+                <TrackToggle
+                  variant="secondary"
+                  source={Track.Source.ScreenShare}
+                  pressed={screenShareToggle.enabled}
+                  disabled={screenShareToggle.pending}
+                  onPressedChange={screenShareToggle.toggle}
+                  className="relative w-auto"
+                />
+              </div>
+            </Tooltip>
           )}
 
           {visibleControls.chat && (
-            <Toggle
-              variant="secondary"
-              aria-label="Toggle chat"
-              pressed={chatOpen}
-              onPressedChange={setChatOpen}
-              disabled={!isAgentAvailable}
-              className="aspect-square h-full"
-            >
-              <ChatTextIcon weight="bold" />
-            </Toggle>
+            <Tooltip content="History" side="top">
+              <Toggle
+                variant="secondary"
+                aria-label="Toggle chat"
+                pressed={chatOpen}
+                onPressedChange={setChatOpen}
+                disabled={!isAgentAvailable}
+                className="aspect-square h-full"
+              >
+                <ChatTextIcon weight="bold" />
+              </Toggle>
+            </Tooltip>
           )}
         </div>
         {visibleControls.leave && (

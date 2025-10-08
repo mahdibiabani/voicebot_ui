@@ -149,7 +149,7 @@ export function MediaTiles({ chatOpen, isPopupMode = false }: MediaTilesProps) {
             state={agentState}
             className={cn(
               'overflow-hidden rounded-full',
-              chatOpen ? 'h-32 w-32' : 'h-[300px] w-[300px]'
+              chatOpen ? 'h-48 w-48' : 'h-[500px] w-[500px]'
             )}
           />
         )}
@@ -175,8 +175,8 @@ export function MediaTiles({ chatOpen, isPopupMode = false }: MediaTilesProps) {
             className={cn(
               'overflow-hidden rounded-full',
               chatOpen
-                ? 'h-32 w-32 [&>video]:h-32 [&>video]:w-32 [&>video]:object-cover'
-                : 'h-[300px] w-[300px] [&>video]:h-[300px] [&>video]:w-[300px] [&>video]:object-cover'
+                ? 'h-48 w-48 [&>video]:h-48 [&>video]:w-48 [&>video]:object-cover'
+                : 'h-[500px] w-[500px] [&>video]:h-[400px] [&>video]:w-[400px] [&>video]:object-cover'
             )}
           />
         )}
