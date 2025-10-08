@@ -112,7 +112,7 @@ export function MediaTiles({ chatOpen, isPopupMode = false }: MediaTilesProps) {
   };
   const agentAnimate = {
     ...animationProps.animate,
-    scale: chatOpen ? 1 : 3,
+    scale: chatOpen ? 1 : 4.5,
     transition,
   };
   const avatarAnimate = {
@@ -149,7 +149,7 @@ export function MediaTiles({ chatOpen, isPopupMode = false }: MediaTilesProps) {
             state={agentState}
             className={cn(
               'overflow-hidden rounded-full',
-              chatOpen ? 'h-32 w-32' : 'h-64 w-64'
+              chatOpen ? 'h-32 w-32' : 'h-96 w-96'
             )}
           />
         )}
@@ -176,7 +176,7 @@ export function MediaTiles({ chatOpen, isPopupMode = false }: MediaTilesProps) {
               'overflow-hidden rounded-full',
               chatOpen
                 ? 'h-32 w-32 [&>video]:h-32 [&>video]:w-32 [&>video]:object-cover'
-                : 'h-64 w-64 [&>video]:h-64 [&>video]:w-64 [&>video]:object-cover'
+                : 'h-96 w-96 [&>video]:h-96 [&>video]:w-96 [&>video]:object-cover'
             )}
           />
         )}

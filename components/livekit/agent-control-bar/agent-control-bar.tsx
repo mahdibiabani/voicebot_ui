@@ -1,6 +1,5 @@
 'use client';
 
-import { ChatInput } from '@/components/livekit/chat/chat-input';
 import { Button } from '@/components/ui/button';
 import { Toggle } from '@/components/ui/toggle';
 import { AppConfig } from '@/lib/types';
@@ -40,10 +39,8 @@ export function AgentControlBar({
 }: AgentControlBarProps) {
   const participants = useRemoteParticipants();
   const [chatOpen, setChatOpen] = React.useState(false);
-  const [isSendingMessage, setIsSendingMessage] = React.useState(false);
 
   const isAgentAvailable = participants.some((p) => p.isAgent);
-  const isInputDisabled = !chatOpen || !isAgentAvailable || isSendingMessage;
 
   const [isDisconnecting, setIsDisconnecting] = React.useState(false);
 
@@ -60,15 +57,6 @@ export function AgentControlBar({
     controls,
     saveUserChoices,
   });
-
-  const handleSendMessage = async (message: string) => {
-    setIsSendingMessage(true);
-    try {
-      await onSendMessage?.(message);
-    } finally {
-      setIsSendingMessage(false);
-    }
-  };
 
   const onLeave = async () => {
     setIsDisconnecting(true);
@@ -105,14 +93,21 @@ export function AgentControlBar({
     >
       {capabilities.supportsChatInput && (
         <div
-          inert={!chatOpen}
           className={cn(
             'overflow-hidden transition-[height] duration-300 ease-out',
             chatOpen ? 'h-[57px]' : 'h-0'
           )}
         >
-          <div className="flex h-8 w-full">
-            <ChatInput onSend={handleSendMessage} disabled={isInputDisabled} className="w-full" />
+          <div className="flex h-8 w-full items-center justify-center">
+            <Button
+              variant="primary"
+              onClick={() => setChatOpen(!chatOpen)}
+              disabled={!isAgentAvailable}
+              className="font-mono w-full"
+              size="sm"
+            >
+              HISTORY
+            </Button>
           </div>
           <hr className="border-bg2 my-3" />
         </div>
