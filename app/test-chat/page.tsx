@@ -107,16 +107,16 @@ export default function TestChatPage() {
                     <h2 className="mb-4 text-lg font-semibold">Message Styling:</h2>
                     <ul className="mb-4 space-y-2 text-sm">
                         <li>
-                            <span className="inline-block rounded bg-blue-100 dark:bg-blue-900 px-2 py-1 text-sm">
+                            <span className="inline-block rounded-[20px] bg-blue-500 dark:bg-blue-600 px-4 py-2 text-sm text-white">
                                 User messages
                             </span>
-                            {' '}- Blue background, smaller text (includes text and transcribed audio)
+                            {' '}- Blue background, white text, aligned right (includes text and transcribed audio)
                         </li>
                         <li>
-                            <span className="inline-block rounded bg-gray-200 dark:bg-gray-700 px-2 py-1 text-base">
+                            <span className="inline-block rounded-[20px] bg-gray-200 dark:bg-gray-700 px-4 py-2 text-base">
                                 AI Agent messages
                             </span>
-                            {' '}- Gray background, normal text size
+                            {' '}- Gray background, aligned left
                         </li>
                     </ul>
 
@@ -135,8 +135,8 @@ export default function TestChatPage() {
                 <div className="mt-6 rounded-lg border border-border bg-muted p-4">
                     <h3 className="mb-2 text-sm font-semibold">Note:</h3>
                     <p className="text-sm text-muted-foreground">
-                        All messages are now left-aligned. User messages (including transcriptions marked with [TRANSCRIPTION])
-                        have a blue background with smaller text, while AI agent responses have a gray background with normal text size.
+                        User messages (including transcriptions marked with [TRANSCRIPTION]) are aligned to the right with a blue background,
+                        while AI agent responses are aligned to the left with a gray background. Newest messages appear at the bottom with full scrolling support.
                     </p>
                 </div>
             </div>

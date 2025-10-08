@@ -217,23 +217,25 @@ export const SessionView = ({
                 transition={{ duration: 0.3 }}
                 className="absolute inset-0 z-30 flex flex-col bg-background"
               >
-                <ChatMessageView className="flex-1 overflow-y-auto px-4 pt-4 pb-2">
-                  <div className="space-y-3 whitespace-pre-wrap">
-                    <AnimatePresence>
-                      {messages.map((message: ReceivedChatMessage) => (
-                        <motion.div
-                          key={message.id}
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: 'auto' }}
-                          exit={{ opacity: 1, height: 'auto', translateY: 0.001 }}
-                          transition={{ duration: 0.5, ease: 'easeOut' }}
-                        >
-                          <ChatEntry hideName key={message.id} entry={message} />
-                        </motion.div>
-                      ))}
-                    </AnimatePresence>
-                  </div>
-                </ChatMessageView>
+                <div className="flex-1 overflow-y-auto px-4 pt-4 pb-2">
+                  <ChatMessageView className="min-h-full">
+                    <div className="space-y-3 whitespace-pre-wrap">
+                      <AnimatePresence>
+                        {messages.map((message: ReceivedChatMessage) => (
+                          <motion.div
+                            key={message.id}
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 1, height: 'auto', translateY: 0.001 }}
+                            transition={{ duration: 0.5, ease: 'easeOut' }}
+                          >
+                            <ChatEntry hideName key={message.id} entry={message} />
+                          </motion.div>
+                        ))}
+                      </AnimatePresence>
+                    </div>
+                  </ChatMessageView>
+                </div>
               </motion.div>
             )}
           </AnimatePresence>

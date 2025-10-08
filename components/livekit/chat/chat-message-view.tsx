@@ -1,7 +1,7 @@
 'use client';
 
-import { type RefObject, useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
+import { type RefObject, useEffect, useRef } from 'react';
 
 export function useAutoScroll(scrollContentContainerRef: RefObject<Element | null>) {
   useEffect(() => {
@@ -17,7 +17,7 @@ export function useAutoScroll(scrollContentContainerRef: RefObject<Element | nul
           }
           scrollableParent = scrollableParent.parentElement;
         }
-        
+
         // Fallback to document scrolling if no scrollable parent found
         const { scrollingElement } = document;
         if (scrollingElement) {
@@ -47,7 +47,7 @@ export const ChatMessageView = ({ className, children, ...props }: ChatProps) =>
   useAutoScroll(scrollContentRef);
 
   return (
-    <div ref={scrollContentRef} className={cn('flex flex-col justify-end', className)} {...props}>
+    <div ref={scrollContentRef} className={cn('flex flex-col', className)} {...props}>
       {children}
     </div>
   );
