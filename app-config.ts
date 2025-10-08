@@ -1,9 +1,9 @@
 import type { AppConfig } from './lib/types';
 
 export const APP_CONFIG_DEFAULTS: AppConfig = {
-  companyName: 'LiveKit',
-  pageTitle: 'LiveKit Voice Agent',
-  pageDescription: 'A voice agent built with LiveKit',
+  companyName: 'TechCo',
+  pageTitle: 'Welcome Page',
+  pageDescription: 'A modern digital experience platform',
 
   supportsChatInput: true,
   supportsVideoInput: true,
@@ -11,9 +11,9 @@ export const APP_CONFIG_DEFAULTS: AppConfig = {
   isPreConnectBufferEnabled: true,
 
   logo: '/lk-logo.svg',
-  accent: '#002cf2',
+  accent: '#4FC3F7',
   logoDark: '/lk-logo-dark.svg',
-  accentDark: '#1fd5f9',
+  accentDark: '#4DB6AC',
   startButtonText: 'Start call',
 
   agentName: undefined,

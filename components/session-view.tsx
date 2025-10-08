@@ -77,15 +77,7 @@ export const SessionView = ({
             description: (
               <p className="w-full">
                 {reason}
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://docs.livekit.io/agents/start/voice-ai/"
-                  className="whitespace-nowrap underline"
-                >
-                  See quickstart guide
-                </a>
-                .
+                Please try again or check your connection.
               </p>
             ),
           });
@@ -182,7 +174,7 @@ export const SessionView = ({
               className="absolute bottom-4 left-0 right-0 z-10 text-center text-xs text-muted-foreground"
             >
               <p className="animate-text-shimmer inline-block !bg-clip-text font-semibold text-transparent">
-                Agent is listening, ask it a question or type below
+                Agent is listening, ask it a question and start going!
               </p>
             </motion.div>
           )}
@@ -279,7 +271,7 @@ export const SessionView = ({
                 )}
               >
                 <p className="animate-text-shimmer inline-block !bg-clip-text text-sm font-semibold text-transparent">
-                  Agent is listening, ask it a question
+                  Agent is listening, ask it a question and start going!
                 </p>
               </motion.div>
             )}

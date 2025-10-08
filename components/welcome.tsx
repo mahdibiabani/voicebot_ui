@@ -64,16 +64,7 @@ export const Welcome = ({
       </Button>
       <footer className="fixed bottom-5 left-0 z-20 flex w-full items-center justify-center">
         <p className="text-fg1 max-w-prose pt-1 text-xs leading-5 font-normal text-pretty md:text-sm">
-          Need help getting set up? Check out the{' '}
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://docs.livekit.io/agents/start/voice-ai/"
-            className="underline"
-          >
-            Voice AI quickstart
-          </a>
-          .
+          Welcome! Click the button above to get started with your session.
         </p>
       </footer>
     </section>
