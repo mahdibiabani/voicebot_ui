@@ -346,42 +346,52 @@ export function FloatingBot({ appConfig }: FloatingBotProps) {
             </div>
 
             {/* Floating Action Button */}
-            <motion.button
-                onClick={handleToggle}
-                className={cn(
-                    'fixed right-6 bottom-6 z-[100] flex h-14 w-14 items-center justify-center rounded-full shadow-lg transition-colors',
-                    isOpen
-                        ? 'bg-destructive text-destructive-foreground hover:bg-destructive/90'
-                        : 'bg-primary text-primary-foreground hover:bg-primary/90'
-                )}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                aria-label={isOpen ? 'Close chat' : 'Open chat'}
-            >
-                <AnimatePresence mode="wait" initial={false}>
-                    {isOpen ? (
-                        <motion.div
-                            key="close"
-                            initial={{ rotate: -90, opacity: 0 }}
-                            animate={{ rotate: 0, opacity: 1 }}
-                            exit={{ rotate: 90, opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                        >
-                            <X size={24} weight="bold" />
-                        </motion.div>
-                    ) : (
-                        <motion.div
-                            key="open"
-                            initial={{ rotate: 90, opacity: 0 }}
-                            animate={{ rotate: 0, opacity: 1 }}
-                            exit={{ rotate: -90, opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                        >
-                            <ChatCircle size={24} weight="bold" />
-                        </motion.div>
+            <div className="fixed right-6 bottom-6 z-[100]">
+                <div className="relative inline-block group">
+                    <motion.button
+                        onClick={handleToggle}
+                        className={cn(
+                            'flex h-18 w-18 items-center justify-center rounded-full shadow-lg transition-colors',
+                            isOpen
+                                ? 'bg-destructive text-destructive-foreground hover:bg-destructive/90'
+                                : 'bg-primary text-primary-foreground hover:bg-primary/90 animate-pulse-shine'
+                        )}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        aria-label={isOpen ? 'Close chat' : 'Open chat'}
+                    >
+                        <AnimatePresence mode="wait" initial={false}>
+                            {isOpen ? (
+                                <motion.div
+                                    key="close"
+                                    initial={{ rotate: -90, opacity: 0 }}
+                                    animate={{ rotate: 0, opacity: 1 }}
+                                    exit={{ rotate: 90, opacity: 0 }}
+                                    transition={{ duration: 0.2 }}
+                                >
+                                    <X size={28} weight="bold" />
+                                </motion.div>
+                            ) : (
+                                <motion.div
+                                    key="open"
+                                    initial={{ rotate: 90, opacity: 0 }}
+                                    animate={{ rotate: 0, opacity: 1 }}
+                                    exit={{ rotate: -90, opacity: 0 }}
+                                    transition={{ duration: 0.2 }}
+                                >
+                                    <ChatCircle size={28} weight="bold" />
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </motion.button>
+                    {!isOpen && (
+                        <div className="pointer-events-none absolute right-full top-1/2 mr-3 -translate-y-1/2 whitespace-nowrap rounded-md bg-gray-900 px-3 py-1.5 text-xs font-medium text-white shadow-lg opacity-0 group-hover:opacity-100 transition-opacity dark:bg-gray-700">
+                            Ask a question!
+                            <div className="absolute left-full top-1/2 -ml-1 h-2 w-2 -translate-y-1/2 rotate-45 bg-gray-900 dark:bg-gray-700" />
+                        </div>
                     )}
-                </AnimatePresence>
-            </motion.button>
+                </div>
+            </div>
 
             {/* Popup Container */}
             <AnimatePresence>
