@@ -91,28 +91,6 @@ export function AgentControlBar({
       )}
       {...props}
     >
-      {capabilities.supportsChatInput && (
-        <div
-          className={cn(
-            'overflow-hidden transition-[height] duration-300 ease-out',
-            chatOpen ? 'h-[57px]' : 'h-0'
-          )}
-        >
-          <div className="flex h-8 w-full items-center justify-center">
-            <Button
-              variant="primary"
-              onClick={() => setChatOpen(!chatOpen)}
-              disabled={!isAgentAvailable}
-              className="font-mono w-full"
-              size="sm"
-            >
-              HISTORY
-            </Button>
-          </div>
-          <hr className="border-bg2 my-3" />
-        </div>
-      )}
-
       <div className="flex flex-row justify-between gap-1">
         <div className="flex gap-1">
           {visibleControls.microphone && (
