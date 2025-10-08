@@ -99,46 +99,250 @@ export function FloatingBot({ appConfig }: FloatingBotProps) {
 
     return (
         <>
-            {/* Background Content */}
-            <div className="flex min-h-screen flex-col items-center justify-center bg-background p-8 text-center">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+            {/* Background Content - Landing Page */}
+            <div className="min-h-screen bg-background">
+                {/* Navigation Bar */}
+                <motion.nav
+                    initial={{ y: -20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
                     transition={{ duration: 0.5 }}
-                    className="max-w-2xl space-y-6"
+                    className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/80 backdrop-blur-md"
                 >
-                    <svg
-                        width="80"
-                        height="80"
-                        viewBox="0 0 64 64"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="mx-auto text-foreground"
-                    >
-                        <path
-                            d="M15 24V40C15 40.7957 14.6839 41.5587 14.1213 42.1213C13.5587 42.6839 12.7956 43 12 43C11.2044 43 10.4413 42.6839 9.87868 42.1213C9.31607 41.5587 9 40.7957 9 40V24C9 23.2044 9.31607 22.4413 9.87868 21.8787C10.4413 21.3161 11.2044 21 12 21C12.7956 21 13.5587 21.3161 14.1213 21.8787C14.6839 22.4413 15 23.2044 15 24ZM22 5C21.2044 5 20.4413 5.31607 19.8787 5.87868C19.3161 6.44129 19 7.20435 19 8V56C19 56.7957 19.3161 57.5587 19.8787 58.1213C20.4413 58.6839 21.2044 59 22 59C22.7956 59 23.5587 58.6839 24.1213 58.1213C24.6839 57.5587 25 56.7957 25 56V8C25 7.20435 24.6839 6.44129 24.1213 5.87868C23.5587 5.31607 22.7956 5 22 5ZM32 13C31.2044 13 30.4413 13.3161 29.8787 13.8787C29.3161 14.4413 29 15.2044 29 16V48C29 48.7957 29.3161 49.5587 29.8787 50.1213C30.4413 50.6839 31.2044 51 32 51C32.7956 51 33.5587 50.6839 34.1213 50.1213C34.6839 49.5587 35 48.7957 35 48V16C35 15.2044 34.6839 14.4413 34.1213 13.8787C33.5587 13.3161 32.7956 13 32 13ZM42 21C41.2043 21 40.4413 21.3161 39.8787 21.8787C39.3161 22.4413 39 23.2044 39 24V40C39 40.7957 39.3161 41.5587 39.8787 42.1213C40.4413 42.6839 41.2043 43 42 43C42.7957 43 43.5587 42.6839 44.1213 42.1213C44.6839 41.5587 45 40.7957 45 40V24C45 23.2044 44.6839 22.4413 44.1213 21.8787C43.5587 21.3161 42.7957 21 42 21ZM52 17C51.2043 17 50.4413 17.3161 49.8787 17.8787C49.3161 18.4413 49 19.2044 49 20V44C49 44.7957 49.3161 45.5587 49.8787 46.1213C50.4413 46.6839 51.2043 47 52 47C52.7957 47 53.5587 46.6839 54.1213 46.1213C54.6839 45.5587 55 44.7957 55 44V20C55 19.2044 54.6839 18.4413 54.1213 17.8787C53.5587 17.3161 52.7957 17 52 17Z"
-                            fill="currentColor"
-                        />
-                    </svg>
+                    <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+                        <div className="text-2xl font-bold">TechCo</div>
+                        <div className="hidden gap-8 md:flex">
+                            <a href="#home" className="text-sm font-medium transition-colors hover:text-primary">Home</a>
+                            <a href="#about" className="text-sm font-medium transition-colors hover:text-primary">About</a>
+                            <a href="#services" className="text-sm font-medium transition-colors hover:text-primary">Services</a>
+                            <a href="#contact" className="text-sm font-medium transition-colors hover:text-primary">Contact</a>
+                        </div>
+                    </div>
+                </motion.nav>
 
-                    <h1 className="text-4xl font-bold tracking-tight md:text-5xl">
-                        {appConfig.pageTitle || 'Voice AI Agent'}
-                    </h1>
-
-                    <p className="text-lg text-muted-foreground md:text-xl">
-                        {appConfig.pageDescription || 'Click the button below to start chatting with your AI assistant'}
-                    </p>
-
+                {/* Hero Section */}
+                <section id="home" className="flex min-h-screen items-center justify-center px-6 pt-20">
                     <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.3, duration: 0.5 }}
-                        className="flex items-center justify-center gap-2 text-sm text-muted-foreground"
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.7, delay: 0.2 }}
+                        className="mx-auto max-w-5xl text-center"
                     >
-                        <ChatCircle size={20} weight="duotone" />
-                        <span>Click the chat button in the bottom right to begin</span>
+                        <h1 className="mb-6 text-5xl font-bold leading-tight tracking-tight md:text-7xl">
+                            Transform Your Digital Experience
+                        </h1>
+                        <p className="mb-8 text-lg text-muted-foreground md:text-xl">
+                            We help businesses innovate and grow with cutting-edge technology solutions tailored to your unique needs.
+                        </p>
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="rounded-full bg-primary px-8 py-4 text-lg font-semibold text-primary-foreground shadow-lg transition-all hover:bg-primary/90"
+                        >
+                            Get Started Today
+                        </motion.button>
                     </motion.div>
-                </motion.div>
+                </section>
+
+                {/* Services Section */}
+                <section id="services" className="bg-muted/30 px-6 py-24">
+                    <div className="mx-auto max-w-7xl">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6 }}
+                            viewport={{ once: true }}
+                            className="mb-16 text-center"
+                        >
+                            <h2 className="mb-4 text-4xl font-bold md:text-5xl">Our Services</h2>
+                            <p className="text-lg text-muted-foreground">
+                                Comprehensive solutions designed to elevate your business
+                            </p>
+                        </motion.div>
+
+                        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+                            {[
+                                {
+                                    title: 'Web Development',
+                                    description: 'Build modern, responsive websites that engage your audience and drive results.',
+                                    icon: '🌐'
+                                },
+                                {
+                                    title: 'Mobile Apps',
+                                    description: 'Create seamless mobile experiences for iOS and Android platforms.',
+                                    icon: '📱'
+                                },
+                                {
+                                    title: 'Cloud Solutions',
+                                    description: 'Leverage the power of cloud computing for scalability and reliability.',
+                                    icon: '☁️'
+                                },
+                                {
+                                    title: 'Consulting',
+                                    description: 'Strategic guidance to help you make informed technology decisions.',
+                                    icon: '💡'
+                                }
+                            ].map((service, index) => (
+                                <motion.div
+                                    key={index}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                                    viewport={{ once: true }}
+                                    className="rounded-2xl border border-border bg-background p-8 shadow-sm transition-all hover:shadow-lg"
+                                >
+                                    <div className="mb-4 text-5xl">{service.icon}</div>
+                                    <h3 className="mb-3 text-xl font-semibold">{service.title}</h3>
+                                    <p className="text-muted-foreground">{service.description}</p>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* About Section */}
+                <section id="about" className="px-6 py-24">
+                    <div className="mx-auto max-w-7xl">
+                        <div className="grid items-center gap-12 md:grid-cols-2">
+                            <motion.div
+                                initial={{ opacity: 0, x: -30 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.6 }}
+                                viewport={{ once: true }}
+                            >
+                                <h2 className="mb-6 text-4xl font-bold md:text-5xl">About Our Company</h2>
+                                <p className="mb-4 text-lg text-muted-foreground">
+                                    With over a decade of experience, we've been at the forefront of digital innovation, helping businesses of all sizes achieve their goals through technology.
+                                </p>
+                                <p className="mb-6 text-lg text-muted-foreground">
+                                    Our team of experts is dedicated to delivering exceptional results, combining technical excellence with creative problem-solving to bring your vision to life.
+                                </p>
+                                <div className="flex gap-8">
+                                    <div>
+                                        <div className="mb-2 text-3xl font-bold text-primary">500+</div>
+                                        <div className="text-sm text-muted-foreground">Projects Completed</div>
+                                    </div>
+                                    <div>
+                                        <div className="mb-2 text-3xl font-bold text-primary">50+</div>
+                                        <div className="text-sm text-muted-foreground">Team Members</div>
+                                    </div>
+                                    <div>
+                                        <div className="mb-2 text-3xl font-bold text-primary">98%</div>
+                                        <div className="text-sm text-muted-foreground">Client Satisfaction</div>
+                                    </div>
+                                </div>
+                            </motion.div>
+                            <motion.div
+                                initial={{ opacity: 0, x: 30 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.6 }}
+                                viewport={{ once: true }}
+                                className="rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 p-12"
+                            >
+                                <div className="flex h-full items-center justify-center">
+                                    <div className="text-center">
+                                        <div className="mb-4 text-8xl">🚀</div>
+                                        <p className="text-lg font-semibold">Innovation Driven</p>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Testimonials Section */}
+                <section className="bg-muted/30 px-6 py-24">
+                    <div className="mx-auto max-w-7xl">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6 }}
+                            viewport={{ once: true }}
+                            className="mb-16 text-center"
+                        >
+                            <h2 className="mb-4 text-4xl font-bold md:text-5xl">What Our Clients Say</h2>
+                            <p className="text-lg text-muted-foreground">
+                                Don't just take our word for it
+                            </p>
+                        </motion.div>
+
+                        <div className="grid gap-8 md:grid-cols-3">
+                            {[
+                                {
+                                    quote: "Working with this team has been transformative for our business. Their expertise and dedication are unmatched.",
+                                    author: "Sarah Johnson",
+                                    role: "CEO, TechStart Inc."
+                                },
+                                {
+                                    quote: "The quality of work and attention to detail exceeded our expectations. Highly recommend their services!",
+                                    author: "Michael Chen",
+                                    role: "CTO, InnovateLabs"
+                                },
+                                {
+                                    quote: "Professional, reliable, and innovative. They delivered exactly what we needed, on time and on budget.",
+                                    author: "Emily Rodriguez",
+                                    role: "Founder, Digital Dynamics"
+                                }
+                            ].map((testimonial, index) => (
+                                <motion.div
+                                    key={index}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                                    viewport={{ once: true }}
+                                    className="rounded-2xl border border-border bg-background p-8 shadow-sm"
+                                >
+                                    <div className="mb-6 text-4xl text-primary">"</div>
+                                    <p className="mb-6 text-muted-foreground">{testimonial.quote}</p>
+                                    <div>
+                                        <div className="font-semibold">{testimonial.author}</div>
+                                        <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* Footer */}
+                <footer id="contact" className="border-t border-border bg-background px-6 py-16">
+                    <div className="mx-auto max-w-7xl">
+                        <div className="grid gap-12 md:grid-cols-4">
+                            <div className="md:col-span-2">
+                                <div className="mb-4 text-2xl font-bold">TechCo</div>
+                                <p className="mb-4 text-muted-foreground">
+                                    Empowering businesses through innovative technology solutions since 2013.
+                                </p>
+                                <div className="text-sm text-muted-foreground">
+                                    <p>123 Innovation Street</p>
+                                    <p>San Francisco, CA 94105</p>
+                                    <p className="mt-2">contact@techco.example</p>
+                                    <p>+1 (555) 123-4567</p>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 className="mb-4 font-semibold">Company</h3>
+                                <ul className="space-y-2 text-sm text-muted-foreground">
+                                    <li><a href="#about" className="transition-colors hover:text-foreground">About Us</a></li>
+                                    <li><a href="#services" className="transition-colors hover:text-foreground">Services</a></li>
+                                    <li><a href="#" className="transition-colors hover:text-foreground">Careers</a></li>
+                                    <li><a href="#" className="transition-colors hover:text-foreground">Blog</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 className="mb-4 font-semibold">Legal</h3>
+                                <ul className="space-y-2 text-sm text-muted-foreground">
+                                    <li><a href="#" className="transition-colors hover:text-foreground">Privacy Policy</a></li>
+                                    <li><a href="#" className="transition-colors hover:text-foreground">Terms of Service</a></li>
+                                    <li><a href="#" className="transition-colors hover:text-foreground">Cookie Policy</a></li>
+                                    <li><a href="#" className="transition-colors hover:text-foreground">GDPR</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="mt-12 border-t border-border pt-8 text-center text-sm text-muted-foreground">
+                            <p>© {new Date().getFullYear()} TechCo. All rights reserved.</p>
+                        </div>
+                    </div>
+                </footer>
             </div>
 
             {/* Floating Action Button */}
