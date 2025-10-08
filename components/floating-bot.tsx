@@ -351,7 +351,7 @@ export function FloatingBot({ appConfig }: FloatingBotProps) {
                     <motion.button
                         onClick={handleToggle}
                         className={cn(
-                            'flex h-18 w-18 items-center justify-center rounded-full shadow-lg transition-colors',
+                            'flex h-28 w-28 items-center justify-center rounded-full shadow-lg transition-colors overflow-hidden',
                             isOpen
                                 ? 'bg-destructive text-destructive-foreground hover:bg-destructive/90'
                                 : 'bg-primary text-primary-foreground hover:bg-primary/90 animate-pulse-shine'
@@ -369,7 +369,7 @@ export function FloatingBot({ appConfig }: FloatingBotProps) {
                                     exit={{ rotate: 90, opacity: 0 }}
                                     transition={{ duration: 0.2 }}
                                 >
-                                    <X size={28} weight="bold" />
+                                    <X size={32} weight="bold" />
                                 </motion.div>
                             ) : (
                                 <motion.div
@@ -378,8 +378,13 @@ export function FloatingBot({ appConfig }: FloatingBotProps) {
                                     animate={{ rotate: 0, opacity: 1 }}
                                     exit={{ rotate: -90, opacity: 0 }}
                                     transition={{ duration: 0.2 }}
+                                    className="flex items-center justify-center"
                                 >
-                                    <ChatCircle size={28} weight="bold" />
+                                    <img 
+                                        src="/button-icon.png" 
+                                        alt="Chat" 
+                                        className="w-16 h-16 object-contain border-2 border-white rounded-lg"
+                                    />
                                 </motion.div>
                             )}
                         </AnimatePresence>
