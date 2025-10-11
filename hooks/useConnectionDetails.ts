@@ -21,7 +21,6 @@ export default function useConnectionDetails(appConfig: AppConfig) {
     setConnectionDetails(null);
     const url = new URL(
       process.env.NEXT_PUBLIC_CONN_DETAILS_ENDPOINT ?? '/avatar-assistant/api/connection-details',
-      C:\Users\m.yazdi\Desktop\livekit_asr\voicebot_ui\hooks\useConnectionDetails.ts
       window.location.origin
     );
 

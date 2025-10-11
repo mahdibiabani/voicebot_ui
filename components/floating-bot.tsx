@@ -109,8 +109,11 @@ export function FloatingBot({ appConfig }: FloatingBotProps) {
                     className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/80 backdrop-blur-md"
                 >
                     <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-                        <div className="text-2xl font-bold">
-                            DemisCo <span style={{ color: 'var(--secondary-blue)' }}>AI</span>
+                        <div className="flex items-center gap-3">
+                            <img src="/demis2.png" alt="DemisCo AI Logo" className="h-8 w-8" />
+                            <div className="text-2xl font-bold">
+                                DemisCo <span style={{ color: 'var(--secondary-blue)' }}>AI</span>
+                            </div>
                         </div>
                         <div className="hidden gap-8 md:flex">
                             <a href="#home" className="nav-link text-sm font-medium transition-colors hover:text-primary">Home</a>
