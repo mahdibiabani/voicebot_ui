@@ -44,9 +44,21 @@ export const SessionView = ({
   const [chatOpen, setChatOpen] = useState(false);
   const { messages, send } = useChatAndTranscription();
   const room = useRoomContext();
+  const [isLoading, setIsLoading] = useState(false);
 
   // Track if user is speaking (agent is listening)
   const isUserSpeaking = agentState === 'listening';
+
+  // Loading state effect - show "Loading..." for 6 seconds when session starts
+  useEffect(() => {
+    if (sessionStarted) {
+      setIsLoading(true);
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 6000); // 6 seconds
+      return () => clearTimeout(timer);
+    }
+  }, [sessionStarted]);
 
   useDebugMode({
     enabled: process.env.NODE_END !== 'production',
@@ -174,7 +186,7 @@ export const SessionView = ({
               className="absolute bottom-4 left-0 right-0 z-10 text-center text-xs text-muted-foreground"
             >
               <p className="animate-text-shimmer inline-block !bg-clip-text font-semibold text-transparent">
-                Agent is listening, ask it a question and start going!
+                {isLoading ? 'Loading...' : 'Agent is listening, ask it a question and start going!'}
               </p>
             </motion.div>
           )}
@@ -271,7 +283,7 @@ export const SessionView = ({
                 )}
               >
                 <p className="animate-text-shimmer inline-block !bg-clip-text text-sm font-semibold text-transparent">
-                  Agent is listening, ask it a question and start going!
+                  {isLoading ? 'Loading...' : 'Agent is listening, ask it a question and start going!'}
                 </p>
               </motion.div>
             )}

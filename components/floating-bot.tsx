@@ -35,11 +35,11 @@ function AvatarSlideshow() {
     }, [avatarImages.length]);
 
     return (
-        <div className="relative w-60 h-60">
+        <div className="relative w-full h-full overflow-hidden rounded-full">
             {avatarImages.map((src, index) => (
                 <motion.div
                     key={src}
-                    className="absolute inset-0"
+                    className="absolute inset-0 overflow-hidden rounded-full"
                     initial={{ opacity: 0 }}
                     animate={{
                         opacity: currentIndex === index ? 1 : 0,
@@ -60,6 +60,7 @@ function AvatarSlideshow() {
                         className="w-full h-full rounded-full object-cover"
                         style={{
                             boxShadow: '0 10px 40px rgba(239, 59, 86, 0.3)',
+                            padding: '0',
                         }}
                     />
                 </motion.div>
@@ -247,12 +248,13 @@ export function FloatingBot({ appConfig }: FloatingBotProps) {
                                     >
                                         {/* Inner Circle */}
                                         <motion.div
-                                            className="flex h-72 w-72 items-center justify-center rounded-full bg-background"
+                                            className="relative h-72 w-72 rounded-full bg-background overflow-hidden"
                                             animate={{ rotate: 360 }}
                                             transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
                                         >
                                             {/* Avatar Icon/Representation */}
                                             <motion.div
+                                                className="absolute inset-0"
                                                 animate={{ rotate: -360 }}
                                                 transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
                                             >
