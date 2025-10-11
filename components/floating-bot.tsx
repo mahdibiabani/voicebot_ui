@@ -205,11 +205,7 @@ export function FloatingBot({ appConfig }: FloatingBotProps) {
                                                 animate={{ rotate: -360 }}
                                                 transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
                                             >
-                                                <motion.div
-                                                    animate={{ scale: [1, 1.1, 1] }}
-                                                    transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                                                    className="relative"
-                                                >
+                                                <div className="relative">
                                                     <img
                                                         src="/button-icon.png"
                                                         alt="Personalized AI Avatar"
@@ -218,7 +214,7 @@ export function FloatingBot({ appConfig }: FloatingBotProps) {
                                                             boxShadow: '0 10px 40px rgba(239, 59, 86, 0.3)',
                                                         }}
                                                     />
-                                                </motion.div>
+                                                </div>
                                                 <motion.p
                                                     className="mt-4 text-sm font-medium"
                                                     style={{ color: 'var(--secondary-blue)' }}
@@ -724,10 +720,17 @@ export function FloatingBot({ appConfig }: FloatingBotProps) {
                                     transition={{ duration: 0.2 }}
                                     className="flex items-center justify-center w-full h-full"
                                 >
-                                    <img 
+                                    <motion.img 
                                         src="/button-icon.png" 
                                         alt="Chat" 
                                         className="w-full h-full object-cover rounded-full"
+                                        animate={{ scale: [1, 1.08, 1] }}
+                                        transition={{ 
+                                            duration: 2.5, 
+                                            repeat: Infinity, 
+                                            ease: 'easeInOut',
+                                            repeatType: 'loop'
+                                        }}
                                     />
                                 </motion.div>
                             )}
