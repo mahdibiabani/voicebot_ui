@@ -208,37 +208,16 @@ export function FloatingBot({ appConfig }: FloatingBotProps) {
                                                 <motion.div
                                                     animate={{ scale: [1, 1.1, 1] }}
                                                     transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                                                    className="relative"
                                                 >
-                                                    <svg
-                                                        width="120"
-                                                        height="120"
-                                                        viewBox="0 0 120 120"
-                                                        fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                    >
-                                                        {/* AI Assistant Icon */}
-                                                        <circle cx="60" cy="60" r="50" fill="var(--primary-red)" opacity="0.1" />
-                                                        <path
-                                                            d="M60 20C37.91 20 20 37.91 20 60C20 82.09 37.91 100 60 100C82.09 100 100 82.09 100 60C100 37.91 82.09 20 60 20ZM60 35C65.52 35 70 39.48 70 45C70 50.52 65.52 55 60 55C54.48 55 50 50.52 50 45C50 39.48 54.48 35 60 35ZM60 88C50 88 41.18 83.33 35.5 76C36.56 68.83 50 64.75 60 64.75C70 64.75 83.44 68.83 84.5 76C78.82 83.33 70 88 60 88Z"
-                                                            fill="var(--primary-red)"
-                                                        />
-                                                        <motion.circle
-                                                            cx="45"
-                                                            cy="45"
-                                                            r="3"
-                                                            fill="var(--secondary-blue)"
-                                                            animate={{ opacity: [1, 0.3, 1] }}
-                                                            transition={{ duration: 2, repeat: Infinity }}
-                                                        />
-                                                        <motion.circle
-                                                            cx="75"
-                                                            cy="45"
-                                                            r="3"
-                                                            fill="var(--secondary-blue)"
-                                                            animate={{ opacity: [1, 0.3, 1] }}
-                                                            transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-                                                        />
-                                                    </svg>
+                                                    <img
+                                                        src="/button-icon.png"
+                                                        alt="Personalized AI Avatar"
+                                                        className="w-60 h-60 rounded-full object-cover"
+                                                        style={{
+                                                            boxShadow: '0 10px 40px rgba(239, 59, 86, 0.3)',
+                                                        }}
+                                                    />
                                                 </motion.div>
                                                 <motion.p
                                                     className="mt-4 text-sm font-medium"
@@ -246,7 +225,7 @@ export function FloatingBot({ appConfig }: FloatingBotProps) {
                                                     animate={{ opacity: [0.7, 1, 0.7] }}
                                                     transition={{ duration: 2, repeat: Infinity }}
                                                 >
-                                                    AI Assistant
+                                                    Your AI Assistant
                                                 </motion.p>
                                             </motion.div>
                                         </motion.div>
