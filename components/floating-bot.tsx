@@ -16,6 +16,58 @@ interface FloatingBotProps {
     appConfig: AppConfig;
 }
 
+// Avatar Slideshow Component
+function AvatarSlideshow() {
+    const avatarImages = [
+        '/button-icon2.png',
+        '/button-icon3.png',
+        '/button-icon4.png',
+    ];
+
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndex((prevIndex: number) => (prevIndex + 1) % avatarImages.length);
+        }, 4500); // Change image every 4.5 seconds
+
+        return () => clearInterval(interval);
+    }, [avatarImages.length]);
+
+    return (
+        <div className="relative w-60 h-60">
+            {avatarImages.map((src, index) => (
+                <motion.div
+                    key={src}
+                    className="absolute inset-0"
+                    initial={{ opacity: 0 }}
+                    animate={{
+                        opacity: currentIndex === index ? 1 : 0,
+                        scale: currentIndex === index ? [1, 1.05, 1] : 1,
+                        x: currentIndex === index ? [0, -2, 2, 0] : 0,
+                        y: currentIndex === index ? [0, -2, 2, 0] : 0,
+                    }}
+                    transition={{
+                        opacity: { duration: 0.75, ease: 'easeInOut' },
+                        scale: { duration: 5, ease: 'easeInOut', repeat: Infinity },
+                        x: { duration: 8, ease: 'easeInOut', repeat: Infinity },
+                        y: { duration: 9, ease: 'easeInOut', repeat: Infinity },
+                    }}
+                >
+                    <img
+                        src={src}
+                        alt={`AI Avatar ${index + 1}`}
+                        className="w-full h-full rounded-full object-cover"
+                        style={{
+                            boxShadow: '0 10px 40px rgba(239, 59, 86, 0.3)',
+                        }}
+                    />
+                </motion.div>
+            ))}
+        </div>
+    );
+}
+
 export function FloatingBot({ appConfig }: FloatingBotProps) {
     const room = useMemo(() => new Room(), []);
     const [isOpen, setIsOpen] = useState(false);
@@ -201,28 +253,10 @@ export function FloatingBot({ appConfig }: FloatingBotProps) {
                                         >
                                             {/* Avatar Icon/Representation */}
                                             <motion.div
-                                                className="text-center"
                                                 animate={{ rotate: -360 }}
                                                 transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
                                             >
-                                                <div className="relative">
-                                                    <img
-                                                        src="/button-icon.png"
-                                                        alt="Personalized AI Avatar"
-                                                        className="w-60 h-60 rounded-full object-cover"
-                                                        style={{
-                                                            boxShadow: '0 10px 40px rgba(239, 59, 86, 0.3)',
-                                                        }}
-                                                    />
-                                                </div>
-                                                <motion.p
-                                                    className="mt-4 text-sm font-medium"
-                                                    style={{ color: 'var(--secondary-blue)' }}
-                                                    animate={{ opacity: [0.7, 1, 0.7] }}
-                                                    transition={{ duration: 2, repeat: Infinity }}
-                                                >
-                                                    Your AI Assistant
-                                                </motion.p>
+                                                <AvatarSlideshow />
                                             </motion.div>
                                         </motion.div>
                                     </motion.div>
