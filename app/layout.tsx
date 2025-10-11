@@ -1,4 +1,4 @@
-import { Public_Sans } from 'next/font/google';
+import { Public_Sans, Poppins } from 'next/font/google';
 import localFont from 'next/font/local';
 import { headers } from 'next/headers';
 import { APP_CONFIG_DEFAULTS } from '@/app-config';
@@ -9,6 +9,12 @@ import './globals.css';
 const publicSans = Public_Sans({
   variable: '--font-public-sans',
   subsets: ['latin'],
+});
+
+const poppins = Poppins({
+  variable: '--font-poppins',
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
 });
 
 const commitMono = localFont({
@@ -68,7 +74,8 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         <ApplyThemeScript />
       </head>
       <body
-        className={`${publicSans.variable} ${commitMono.variable} overflow-x-hidden antialiased`}
+        className={`${publicSans.variable} ${commitMono.variable} ${poppins.variable} overflow-x-hidden antialiased`}
+        style={{ fontFamily: 'var(--font-poppins), sans-serif' }}
       >
         {children}
         <div className="group fixed bottom-0 left-1/2 z-50 mb-2 -translate-x-1/2">

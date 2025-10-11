@@ -4,6 +4,12 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  /* DemisCo Color Palette */
+  --primary-red: #ef3b56;
+  --secondary-blue: #669bd1;
+  --text-white: #ffffff;
+  --background-dark: #121212;
+  
   --fg0: #000000;
   --fg1: #3b3b3b;
   --fg2: #4d4d4d;
@@ -12,7 +18,7 @@
   --fgSerious: #db1b06;
   --fgSuccess: #006430;
   --fgModerate: #a65006;
-  --fgAccent: #4FC3F7;
+  --fgAccent: #669bd1;
 
   --bg1: #f9f9f6;
   --bg2: #f3f3f1;
@@ -21,35 +27,35 @@
   --bgSerious2: #ffcdc7;
   --bgSuccess: #d1fadf;
   --bgModerate: #faedd1;
-  --bgAccent: #B2EBF2;
-  --bgAccentPrimary: #E0F7FA;
+  --bgAccent: #669bd1;
+  --bgAccentPrimary: #669bd1;
 
   --separator1: #dbdbd8;
   --separator2: #bdbdbb;
   --separatorSerious: #ffcdc7;
   --separatorSuccess: #94dcb5;
   --separatorModerate: #fbd7a0;
-  --separatorAccent: #B2EBF2;
+  --separatorAccent: #669bd1;
 
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: #4FC3F7;
-  --primary-hover: #29B6F6;
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
+  --background: #ffffff;
+  --foreground: #121212;
+  --card: #ffffff;
+  --card-foreground: #121212;
+  --popover: #ffffff;
+  --popover-foreground: #121212;
+  --primary: #ef3b56;
+  --primary-hover: #d32944;
+  --primary-foreground: #ffffff;
+  --secondary: #669bd1;
+  --secondary-foreground: #ffffff;
   --muted: #f3f3f1;
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --muted-foreground: #666666;
+  --accent: #669bd1;
+  --accent-foreground: #ffffff;
+  --border: #e0e0e0;
+  --input: #e0e0e0;
+  --ring: #ef3b56;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -66,6 +72,12 @@
 }
 
 .dark {
+  /* DemisCo Dark Theme */
+  --primary-red: #ef3b56;
+  --secondary-blue: #669bd1;
+  --text-white: #ffffff;
+  --background-dark: #121212;
+  
   --fg0: #ffffff;
   --fg1: #cccccc;
   --fg2: #b2b2b2;
@@ -74,56 +86,56 @@
   --fgSerious: #ff7566;
   --fgSuccess: #3bc981;
   --fgModerate: #ffb752;
-  --fgAccent: #4DB6AC;
+  --fgAccent: #669bd1;
 
   --bg1: #070707;
-  --bg2: #131313;
+  --bg2: #1a1a1a;
   --bg3: #202020;
   --bgSerious: #1f0e0b;
   --bgSerious2: #5a1c16;
   --bgSuccess: #001905;
   --bgModerate: #1a0e04;
-  --bgAccent: #004D40;
-  --bgAccentPrimary: #00695C;
+  --bgAccent: #1e3a52;
+  --bgAccentPrimary: #2a4a66;
 
-  --separator1: #202020;
+  --separator1: #2a2a2a;
   --separator2: #30302f;
   --separatorSerious: #5a1c16;
   --separatorSuccess: #003213;
   --separatorModerate: #3f2208;
-  --separatorAccent: #00695C;
+  --separatorAccent: #2a4a66;
 
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.269 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: #4DB6AC;
-  --primary-hover: #26A69A;
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: #131313;
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.371 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  --background: #121212;
+  --foreground: #ffffff;
+  --card: #1a1a1a;
+  --card-foreground: #ffffff;
+  --popover: #1a1a1a;
+  --popover-foreground: #ffffff;
+  --primary: #ef3b56;
+  --primary-hover: #ff4d6a;
+  --primary-foreground: #ffffff;
+  --secondary: #669bd1;
+  --secondary-foreground: #ffffff;
+  --muted: #1a1a1a;
+  --muted-foreground: #999999;
+  --accent: #669bd1;
+  --accent-foreground: #ffffff;
+  --border: #2a2a2a;
+  --input: #2a2a2a;
+  --ring: #ef3b56;
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.439 0 0);
+  --sidebar: #1a1a1a;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #ef3b56;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #669bd1;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #2a2a2a;
+  --sidebar-ring: #ef3b56;
 }
 
 @theme inline {
@@ -269,5 +281,98 @@
 
   .animate-pulse-shine {
     animation: pulse-shine 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* DemisCo Custom Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  @keyframes glow {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(239, 59, 86, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(239, 59, 86, 0.8);
+    }
+  }
+
+  .animate-fadeInUp {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  .animate-fadeInLeft {
+    animation: fadeInLeft 0.8s ease-out forwards;
+  }
+
+  .animate-fadeInRight {
+    animation: fadeInRight 0.8s ease-out forwards;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite;
+  }
+
+  /* Link hover effect */
+  .nav-link {
+    position: relative;
+    transition: color 0.3s ease;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-red);
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
   }
 }

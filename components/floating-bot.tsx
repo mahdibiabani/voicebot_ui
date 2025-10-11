@@ -109,46 +109,173 @@ export function FloatingBot({ appConfig }: FloatingBotProps) {
                     className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/80 backdrop-blur-md"
                 >
                     <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-                        <div className="text-2xl font-bold">TechCo</div>
+                        <div className="text-2xl font-bold">
+                            DemisCo <span style={{ color: 'var(--secondary-blue)' }}>AI</span>
+                        </div>
                         <div className="hidden gap-8 md:flex">
-                            <a href="#home" className="text-sm font-medium transition-colors hover:text-primary">Home</a>
-                            <a href="#about" className="text-sm font-medium transition-colors hover:text-primary">About</a>
-                            <a href="#services" className="text-sm font-medium transition-colors hover:text-primary">Services</a>
-                            <a href="#contact" className="text-sm font-medium transition-colors hover:text-primary">Contact</a>
+                            <a href="#home" className="nav-link text-sm font-medium transition-colors hover:text-primary">Home</a>
+                            <a href="#features" className="nav-link text-sm font-medium transition-colors hover:text-primary">Features</a>
+                            <a href="#avatar" className="nav-link text-sm font-medium transition-colors hover:text-primary">Your Avatar</a>
+                            <a href="#contact" className="nav-link text-sm font-medium transition-colors hover:text-primary">Contact</a>
                         </div>
                     </div>
                 </motion.nav>
 
                 {/* Hero Section */}
                 <section id="home" className="flex min-h-screen items-center justify-center px-6 pt-20">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.7, delay: 0.2 }}
-                        className="mx-auto max-w-5xl text-center"
-                    >
-                        <h1 className="mb-6 text-5xl font-bold leading-tight tracking-tight md:text-7xl">
-                            Transform Your Digital Experience
-                        </h1>
-                        <p className="mb-8 text-lg text-muted-foreground md:text-xl">
-                            We help businesses innovate and grow with cutting-edge technology solutions tailored to your unique needs.
-                        </p>
-                        <motion.button
-                            whileHover={{ scale: 1.05, backgroundColor: '#29B6F6' }}
-                            whileTap={{ scale: 0.95 }}
-                            className="rounded-full px-8 py-4 text-lg font-semibold shadow-lg transition-all"
-                            style={{
-                                backgroundColor: '#4FC3F7',
-                                color: '#FFFFFF',
-                            }}
-                        >
-                            Get Started Today
-                        </motion.button>
-                    </motion.div>
+                    <div className="mx-auto max-w-7xl">
+                        <div className="grid items-center gap-12 md:grid-cols-2">
+                            {/* Text Content */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.7, delay: 0.2 }}
+                                className="text-center md:text-left"
+                            >
+                                <motion.h1 
+                                    className="mb-6 text-5xl font-bold leading-tight tracking-tight md:text-6xl lg:text-7xl"
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.8, delay: 0.3 }}
+                                >
+                                    Meet the Future of Digital Interaction
+                                </motion.h1>
+                                <motion.p 
+                                    className="mb-8 text-lg text-muted-foreground md:text-xl"
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.8, delay: 0.5 }}
+                                >
+                                    Introducing the DemisCo AI voice assistant. Your personalized avatar, designed to boost productivity and simplify your daily tasks.
+                                </motion.p>
+                                <motion.button
+                                    onClick={handleToggle}
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="rounded-full px-8 py-4 text-lg font-semibold shadow-lg transition-all"
+                                    style={{
+                                        backgroundColor: 'var(--primary-red)',
+                                        color: 'var(--text-white)',
+                                        boxShadow: '0 10px 30px rgba(239, 59, 86, 0.3)',
+                                    }}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.8, delay: 0.7 }}
+                                >
+                                    Try the Live Demo
+                                </motion.button>
+                            </motion.div>
+
+                            {/* Avatar Visualization */}
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.8, delay: 0.4 }}
+                                className="relative flex items-center justify-center"
+                            >
+                                <div className="relative">
+                                    {/* Animated Avatar Circle */}
+                                    <motion.div
+                                        className="relative flex h-80 w-80 items-center justify-center rounded-full"
+                                        style={{
+                                            background: `linear-gradient(135deg, var(--primary-red) 0%, var(--secondary-blue) 100%)`,
+                                            boxShadow: '0 20px 60px rgba(239, 59, 86, 0.4)',
+                                        }}
+                                        animate={{
+                                            boxShadow: [
+                                                '0 20px 60px rgba(239, 59, 86, 0.4)',
+                                                '0 20px 80px rgba(102, 155, 209, 0.6)',
+                                                '0 20px 60px rgba(239, 59, 86, 0.4)',
+                                            ],
+                                        }}
+                                        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                                    >
+                                        {/* Inner Circle */}
+                                        <motion.div
+                                            className="flex h-72 w-72 items-center justify-center rounded-full bg-background"
+                                            animate={{ rotate: 360 }}
+                                            transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+                                        >
+                                            {/* Avatar Icon/Representation */}
+                                            <motion.div
+                                                className="text-center"
+                                                animate={{ rotate: -360 }}
+                                                transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+                                            >
+                                                <motion.div
+                                                    animate={{ scale: [1, 1.1, 1] }}
+                                                    transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                                                >
+                                                    <svg
+                                                        width="120"
+                                                        height="120"
+                                                        viewBox="0 0 120 120"
+                                                        fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                    >
+                                                        {/* AI Assistant Icon */}
+                                                        <circle cx="60" cy="60" r="50" fill="var(--primary-red)" opacity="0.1" />
+                                                        <path
+                                                            d="M60 20C37.91 20 20 37.91 20 60C20 82.09 37.91 100 60 100C82.09 100 100 82.09 100 60C100 37.91 82.09 20 60 20ZM60 35C65.52 35 70 39.48 70 45C70 50.52 65.52 55 60 55C54.48 55 50 50.52 50 45C50 39.48 54.48 35 60 35ZM60 88C50 88 41.18 83.33 35.5 76C36.56 68.83 50 64.75 60 64.75C70 64.75 83.44 68.83 84.5 76C78.82 83.33 70 88 60 88Z"
+                                                            fill="var(--primary-red)"
+                                                        />
+                                                        <motion.circle
+                                                            cx="45"
+                                                            cy="45"
+                                                            r="3"
+                                                            fill="var(--secondary-blue)"
+                                                            animate={{ opacity: [1, 0.3, 1] }}
+                                                            transition={{ duration: 2, repeat: Infinity }}
+                                                        />
+                                                        <motion.circle
+                                                            cx="75"
+                                                            cy="45"
+                                                            r="3"
+                                                            fill="var(--secondary-blue)"
+                                                            animate={{ opacity: [1, 0.3, 1] }}
+                                                            transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                                                        />
+                                                    </svg>
+                                                </motion.div>
+                                                <motion.p
+                                                    className="mt-4 text-sm font-medium"
+                                                    style={{ color: 'var(--secondary-blue)' }}
+                                                    animate={{ opacity: [0.7, 1, 0.7] }}
+                                                    transition={{ duration: 2, repeat: Infinity }}
+                                                >
+                                                    AI Assistant
+                                                </motion.p>
+                                            </motion.div>
+                                        </motion.div>
+                                    </motion.div>
+                                    
+                                    {/* Floating Orbs */}
+                                    <motion.div
+                                        className="absolute -left-8 top-20 h-16 w-16 rounded-full"
+                                        style={{ backgroundColor: 'var(--secondary-blue)', opacity: 0.3 }}
+                                        animate={{
+                                            y: [-10, 10, -10],
+                                            x: [-5, 5, -5],
+                                        }}
+                                        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                                    />
+                                    <motion.div
+                                        className="absolute -right-8 bottom-20 h-12 w-12 rounded-full"
+                                        style={{ backgroundColor: 'var(--primary-red)', opacity: 0.3 }}
+                                        animate={{
+                                            y: [10, -10, 10],
+                                            x: [5, -5, 5],
+                                        }}
+                                        transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+                                    />
+                                </div>
+                            </motion.div>
+                        </div>
+                    </div>
                 </section>
 
-                {/* Services Section */}
-                <section id="services" className="bg-muted/30 px-6 py-24">
+                {/* Features Section */}
+                <section id="features" className="px-6 py-24" style={{ backgroundColor: 'var(--bg1)' }}>
                     <div className="mx-auto max-w-7xl">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -157,96 +284,273 @@ export function FloatingBot({ appConfig }: FloatingBotProps) {
                             viewport={{ once: true }}
                             className="mb-16 text-center"
                         >
-                            <h2 className="mb-4 text-4xl font-bold md:text-5xl">Our Services</h2>
+                            <h2 className="mb-4 text-4xl font-bold md:text-5xl">
+                                Powerful Features for Your Success
+                            </h2>
                             <p className="text-lg text-muted-foreground">
-                                Comprehensive solutions designed to elevate your business
+                                Discover what makes DemisCo AI Assistant the perfect companion for your daily workflow
                             </p>
                         </motion.div>
 
-                        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+                        <div className="grid gap-8 md:grid-cols-3">
                             {[
                                 {
-                                    title: 'Web Development',
-                                    description: 'Build modern, responsive websites that engage your audience and drive results.',
-                                    icon: '🌐'
+                                    title: 'Fully Customizable Avatar',
+                                    description: 'Create an avatar that looks just like you or reflects your brand\'s personality. From appearance to voice, everything is adjustable.',
+                                    icon: (
+                                        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <rect x="8" y="8" width="48" height="48" rx="8" stroke="var(--secondary-blue)" strokeWidth="3" fill="none"/>
+                                            <circle cx="32" cy="24" r="8" fill="var(--secondary-blue)" opacity="0.3"/>
+                                            <path d="M20 44C20 36 26 32 32 32C38 32 44 36 44 44" stroke="var(--secondary-blue)" strokeWidth="3" strokeLinecap="round"/>
+                                            <circle cx="48" cy="16" r="4" fill="var(--primary-red)"/>
+                                            <path d="M52 12L56 8M56 16L52 12" stroke="var(--primary-red)" strokeWidth="2" strokeLinecap="round"/>
+                                        </svg>
+                                    )
                                 },
                                 {
-                                    title: 'Mobile Apps',
-                                    description: 'Create seamless mobile experiences for iOS and Android platforms.',
-                                    icon: '📱'
+                                    title: 'Advanced Natural Language Understanding',
+                                    description: 'DemisCo understands complex conversations, answers your questions, and executes tasks with human-like precision.',
+                                    icon: (
+                                        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8 32C8 18.7 18.7 8 32 8C45.3 8 56 18.7 56 32C56 45.3 45.3 56 32 56C18.7 56 8 45.3 8 32Z" stroke="var(--secondary-blue)" strokeWidth="3" fill="none"/>
+                                            <path d="M16 28C16 28 20 32 24 32C28 32 32 24 36 24C40 24 44 28 48 28" stroke="var(--secondary-blue)" strokeWidth="3" strokeLinecap="round" fill="none"/>
+                                            <path d="M16 36C16 36 20 40 24 40C28 40 32 32 36 32C40 32 44 36 48 36" stroke="var(--primary-red)" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.6"/>
+                                            <circle cx="24" cy="20" r="2" fill="var(--primary-red)"/>
+                                            <circle cx="40" cy="16" r="2" fill="var(--primary-red)"/>
+                                        </svg>
+                                    )
                                 },
                                 {
-                                    title: 'Cloud Solutions',
-                                    description: 'Leverage the power of cloud computing for scalability and reliability.',
-                                    icon: '☁️'
-                                },
-                                {
-                                    title: 'Consulting',
-                                    description: 'Strategic guidance to help you make informed technology decisions.',
-                                    icon: '💡'
+                                    title: 'Seamless Integration',
+                                    description: 'Connect your assistant to your calendar, email, and other productivity tools to maximize your efficiency.',
+                                    icon: (
+                                        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <rect x="12" y="12" width="20" height="20" rx="4" fill="var(--secondary-blue)" opacity="0.3"/>
+                                            <rect x="36" y="12" width="16" height="16" rx="4" stroke="var(--secondary-blue)" strokeWidth="2" fill="none"/>
+                                            <rect x="12" y="36" width="16" height="16" rx="4" stroke="var(--secondary-blue)" strokeWidth="2" fill="none"/>
+                                            <rect x="32" y="32" width="20" height="20" rx="4" fill="var(--primary-red)" opacity="0.3"/>
+                                            <circle cx="32" cy="32" r="6" fill="var(--primary-red)"/>
+                                            <line x1="20" y1="22" x2="26" y2="28" stroke="var(--secondary-blue)" strokeWidth="2"/>
+                                            <line x1="38" y1="28" x2="38" y2="26" stroke="var(--secondary-blue)" strokeWidth="2"/>
+                                            <line x1="26" y1="38" x2="26" y2="36" stroke="var(--secondary-blue)" strokeWidth="2"/>
+                                        </svg>
+                                    )
                                 }
-                            ].map((service, index) => (
+                            ].map((feature, index) => (
                                 <motion.div
                                     key={index}
-                                    initial={{ opacity: 0, y: 20 }}
+                                    initial={{ opacity: 0, y: 30 }}
                                     whileInView={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                                    transition={{ duration: 0.6, delay: index * 0.15 }}
                                     viewport={{ once: true }}
-                                    className="rounded-2xl border border-border bg-background p-8 shadow-sm transition-all hover:shadow-lg"
+                                    className="group rounded-2xl border border-border bg-background p-8 shadow-sm transition-all hover:shadow-xl hover:scale-105"
+                                    style={{
+                                        transition: 'all 0.3s ease',
+                                    }}
                                 >
-                                    <div className="mb-4 text-5xl">{service.icon}</div>
-                                    <h3 className="mb-3 text-xl font-semibold">{service.title}</h3>
-                                    <p className="text-muted-foreground">{service.description}</p>
+                                    <motion.div 
+                                        className="mb-6 flex items-center justify-center"
+                                        whileHover={{ rotate: [0, -10, 10, -10, 0] }}
+                                        transition={{ duration: 0.5 }}
+                                    >
+                                        {feature.icon}
+                                    </motion.div>
+                                    <h3 className="mb-4 text-xl font-semibold">{feature.title}</h3>
+                                    <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
                                 </motion.div>
                             ))}
                         </div>
                     </div>
                 </section>
 
-                {/* About Section */}
-                <section id="about" className="px-6 py-24">
+                {/* Avatar in Action Section */}
+                <section id="avatar" className="px-6 py-24">
                     <div className="mx-auto max-w-7xl">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6 }}
+                            viewport={{ once: true }}
+                            className="mb-16 text-center"
+                        >
+                            <h2 className="mb-4 text-4xl font-bold md:text-5xl">See Your Avatar in Action</h2>
+                            <p className="text-lg text-muted-foreground">
+                                Watch how DemisCo AI responds to your commands with intelligence and personality
+                            </p>
+                        </motion.div>
+
                         <div className="grid items-center gap-12 md:grid-cols-2">
                             <motion.div
                                 initial={{ opacity: 0, x: -30 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.6 }}
                                 viewport={{ once: true }}
+                                className="space-y-6"
                             >
-                                <h2 className="mb-6 text-4xl font-bold md:text-5xl">About Our Company</h2>
-                                <p className="mb-4 text-lg text-muted-foreground">
-                                    With over a decade of experience, we've been at the forefront of digital innovation, helping businesses of all sizes achieve their goals through technology.
-                                </p>
-                                <p className="mb-6 text-lg text-muted-foreground">
-                                    Our team of experts is dedicated to delivering exceptional results, combining technical excellence with creative problem-solving to bring your vision to life.
-                                </p>
-                                <div className="flex gap-8">
-                                    <div>
-                                        <div className="mb-2 text-3xl font-bold text-primary">500+</div>
-                                        <div className="text-sm text-muted-foreground">Projects Completed</div>
+                                <div className="rounded-xl border-2 border-border bg-card p-6 shadow-sm transition-all hover:shadow-md">
+                                    <div className="mb-3 flex items-center gap-3">
+                                        <div 
+                                            className="flex h-10 w-10 items-center justify-center rounded-full"
+                                            style={{ backgroundColor: 'var(--primary-red)', color: 'white' }}
+                                        >
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M10 2C5.58 2 2 5.58 2 10C2 14.42 5.58 18 10 18C14.42 18 18 14.42 18 10C18 5.58 14.42 2 10 2ZM10 6C11.1 6 12 6.9 12 8C12 9.1 11.1 10 10 10C8.9 10 8 9.1 8 8C8 6.9 8.9 6 10 6ZM10 16C8 16 6.24 14.97 5.5 13.4C5.53 11.79 8 10.9 10 10.9C12 10.9 14.47 11.79 14.5 13.4C13.76 14.97 12 16 10 16Z" fill="currentColor"/>
+                                            </svg>
+                                        </div>
+                                        <span className="font-semibold">You</span>
                                     </div>
-                                    <div>
-                                        <div className="mb-2 text-3xl font-bold text-primary">50+</div>
-                                        <div className="text-sm text-muted-foreground">Team Members</div>
-                                    </div>
-                                    <div>
-                                        <div className="mb-2 text-3xl font-bold text-primary">98%</div>
-                                        <div className="text-sm text-muted-foreground">Client Satisfaction</div>
-                                    </div>
+                                    <p className="text-muted-foreground">"What's my next meeting?"</p>
                                 </div>
+
+                                <motion.div
+                                    className="rounded-xl border-2 bg-card p-6 shadow-sm"
+                                    style={{ borderColor: 'var(--secondary-blue)' }}
+                                    initial={{ opacity: 0, x: -20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.6, delay: 0.2 }}
+                                    viewport={{ once: true }}
+                                >
+                                    <div className="mb-3 flex items-center gap-3">
+                                        <div 
+                                            className="flex h-10 w-10 items-center justify-center rounded-full"
+                                            style={{ backgroundColor: 'var(--secondary-blue)', color: 'white' }}
+                                        >
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="10" cy="10" r="8" fill="currentColor"/>
+                                                <circle cx="7" cy="9" r="1.5" fill="white"/>
+                                                <circle cx="13" cy="9" r="1.5" fill="white"/>
+                                            </svg>
+                                        </div>
+                                        <span className="font-semibold" style={{ color: 'var(--secondary-blue)' }}>DemisCo AI</span>
+                                    </div>
+                                    <p className="text-muted-foreground">
+                                        "Your next meeting is at 3:00 PM with the Marketing Team to discuss Q4 campaigns. 
+                                        Would you like me to prepare a summary of last week's analytics for the meeting?"
+                                    </p>
+                                </motion.div>
+
+                                <div className="rounded-xl border-2 border-border bg-card p-6 shadow-sm transition-all hover:shadow-md">
+                                    <div className="mb-3 flex items-center gap-3">
+                                        <div 
+                                            className="flex h-10 w-10 items-center justify-center rounded-full"
+                                            style={{ backgroundColor: 'var(--primary-red)', color: 'white' }}
+                                        >
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M10 2C5.58 2 2 5.58 2 10C2 14.42 5.58 18 10 18C14.42 18 18 14.42 18 10C18 5.58 14.42 2 10 2ZM10 6C11.1 6 12 6.9 12 8C12 9.1 11.1 10 10 10C8.9 10 8 9.1 8 8C8 6.9 8.9 6 10 6ZM10 16C8 16 6.24 14.97 5.5 13.4C5.53 11.79 8 10.9 10 10.9C12 10.9 14.47 11.79 14.5 13.4C13.76 14.97 12 16 10 16Z" fill="currentColor"/>
+                                            </svg>
+                                        </div>
+                                        <span className="font-semibold">You</span>
+                                    </div>
+                                    <p className="text-muted-foreground">"Yes, please. Also send an email to the team."</p>
+                                </div>
+
+                                <motion.div
+                                    className="rounded-xl border-2 bg-card p-6 shadow-sm"
+                                    style={{ borderColor: 'var(--secondary-blue)' }}
+                                    initial={{ opacity: 0, x: -20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.6, delay: 0.4 }}
+                                    viewport={{ once: true }}
+                                >
+                                    <div className="mb-3 flex items-center gap-3">
+                                        <div 
+                                            className="flex h-10 w-10 items-center justify-center rounded-full"
+                                            style={{ backgroundColor: 'var(--secondary-blue)', color: 'white' }}
+                                        >
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <circle cx="10" cy="10" r="8" fill="currentColor"/>
+                                                <circle cx="7" cy="9" r="1.5" fill="white"/>
+                                                <circle cx="13" cy="9" r="1.5" fill="white"/>
+                                            </svg>
+                                        </div>
+                                        <span className="font-semibold" style={{ color: 'var(--secondary-blue)' }}>DemisCo AI</span>
+                                    </div>
+                                    <p className="text-muted-foreground">
+                                        "Done! I've prepared the analytics summary and sent it to all team members. 
+                                        Is there anything else you'd like me to help with?"
+                                    </p>
+                                </motion.div>
                             </motion.div>
+
                             <motion.div
                                 initial={{ opacity: 0, x: 30 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.6 }}
                                 viewport={{ once: true }}
-                                className="rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 p-12"
+                                className="rounded-2xl p-12"
+                                style={{
+                                    background: 'linear-gradient(135deg, rgba(239, 59, 86, 0.1) 0%, rgba(102, 155, 209, 0.1) 100%)',
+                                    border: '2px solid var(--border)',
+                                }}
                             >
-                                <div className="flex h-full items-center justify-center">
-                                    <div className="text-center">
-                                        <div className="mb-4 text-8xl">🚀</div>
-                                        <p className="text-lg font-semibold">Innovation Driven</p>
-                                    </div>
+                                <div className="flex h-full flex-col items-center justify-center text-center">
+                                    <motion.div
+                                        animate={{
+                                            scale: [1, 1.05, 1],
+                                            rotate: [0, 5, -5, 0],
+                                        }}
+                                        transition={{
+                                            duration: 4,
+                                            repeat: Infinity,
+                                            ease: 'easeInOut',
+                                        }}
+                                        className="mb-6"
+                                    >
+                                        <svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <circle cx="80" cy="80" r="70" fill="var(--primary-red)" opacity="0.1"/>
+                                            <circle cx="80" cy="80" r="60" stroke="var(--secondary-blue)" strokeWidth="3" fill="none" opacity="0.5"/>
+                                            <circle cx="80" cy="60" r="20" fill="var(--secondary-blue)" opacity="0.3"/>
+                                            <path d="M50 100C50 85 62 75 80 75C98 75 110 85 110 100" stroke="var(--secondary-blue)" strokeWidth="4" strokeLinecap="round"/>
+                                            <motion.circle
+                                                cx="70"
+                                                cy="60"
+                                                r="5"
+                                                fill="var(--primary-red)"
+                                                animate={{ scale: [1, 1.3, 1] }}
+                                                transition={{ duration: 1.5, repeat: Infinity }}
+                                            />
+                                            <motion.circle
+                                                cx="90"
+                                                cy="60"
+                                                r="5"
+                                                fill="var(--primary-red)"
+                                                animate={{ scale: [1, 1.3, 1] }}
+                                                transition={{ duration: 1.5, repeat: Infinity, delay: 0.3 }}
+                                            />
+                                            <motion.path
+                                                d="M40 80 L60 85 L55 90"
+                                                stroke="var(--secondary-blue)"
+                                                strokeWidth="2"
+                                                fill="none"
+                                                animate={{ opacity: [0.3, 1, 0.3] }}
+                                                transition={{ duration: 2, repeat: Infinity }}
+                                            />
+                                            <motion.path
+                                                d="M120 80 L100 85 L105 90"
+                                                stroke="var(--secondary-blue)"
+                                                strokeWidth="2"
+                                                fill="none"
+                                                animate={{ opacity: [0.3, 1, 0.3] }}
+                                                transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                                            />
+                                        </svg>
+                                    </motion.div>
+                                    <h3 className="mb-3 text-2xl font-bold">Intelligent & Responsive</h3>
+                                    <p className="text-muted-foreground">
+                                        Your avatar learns from every interaction, providing increasingly personalized and accurate assistance
+                                    </p>
+                                    <motion.button
+                                        onClick={handleToggle}
+                                        className="mt-6 rounded-full px-6 py-3 font-semibold transition-all"
+                                        style={{
+                                            backgroundColor: 'var(--primary-red)',
+                                            color: 'white',
+                                        }}
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
+                                    >
+                                        Try It Now
+                                    </motion.button>
                                 </div>
                             </motion.div>
                         </div>
@@ -254,7 +558,7 @@ export function FloatingBot({ appConfig }: FloatingBotProps) {
                 </section>
 
                 {/* Testimonials Section */}
-                <section className="bg-muted/30 px-6 py-24">
+                <section className="px-6 py-24" style={{ backgroundColor: 'var(--bg1)' }}>
                     <div className="mx-auto max-w-7xl">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -263,28 +567,28 @@ export function FloatingBot({ appConfig }: FloatingBotProps) {
                             viewport={{ once: true }}
                             className="mb-16 text-center"
                         >
-                            <h2 className="mb-4 text-4xl font-bold md:text-5xl">What Our Clients Say</h2>
+                            <h2 className="mb-4 text-4xl font-bold md:text-5xl">Loved by Professionals</h2>
                             <p className="text-lg text-muted-foreground">
-                                Don't just take our word for it
+                                See how DemisCo AI is transforming workflows across industries
                             </p>
                         </motion.div>
 
                         <div className="grid gap-8 md:grid-cols-3">
                             {[
                                 {
-                                    quote: "Working with this team has been transformative for our business. Their expertise and dedication are unmatched.",
-                                    author: "Sarah Johnson",
-                                    role: "CEO, TechStart Inc."
+                                    quote: "DemisCo AI has revolutionized how I manage my day. It's like having a personal assistant who truly understands my needs.",
+                                    author: "Sarah Mitchell",
+                                    role: "Product Manager, TechFlow"
                                 },
                                 {
-                                    quote: "The quality of work and attention to detail exceeded our expectations. Highly recommend their services!",
-                                    author: "Michael Chen",
-                                    role: "CTO, InnovateLabs"
+                                    quote: "The natural language understanding is incredible. I can have real conversations with my avatar, and it always gets it right.",
+                                    author: "David Park",
+                                    role: "Entrepreneur"
                                 },
                                 {
-                                    quote: "Professional, reliable, and innovative. They delivered exactly what we needed, on time and on budget.",
-                                    author: "Emily Rodriguez",
-                                    role: "Founder, Digital Dynamics"
+                                    quote: "Customizing my avatar to match our brand was seamless. Our clients love interacting with our AI representative!",
+                                    author: "Emma Williams",
+                                    role: "CEO, BrandVision"
                                 }
                             ].map((testimonial, index) => (
                                 <motion.div
@@ -293,13 +597,22 @@ export function FloatingBot({ appConfig }: FloatingBotProps) {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.5, delay: index * 0.1 }}
                                     viewport={{ once: true }}
-                                    className="rounded-2xl border border-border bg-background p-8 shadow-sm"
+                                    className="rounded-2xl border-2 bg-background p-8 shadow-sm transition-all hover:shadow-lg"
+                                    style={{ borderColor: 'var(--border)' }}
                                 >
-                                    <div className="mb-6 text-4xl text-primary">"</div>
-                                    <p className="mb-6 text-muted-foreground">{testimonial.quote}</p>
-                                    <div>
-                                        <div className="font-semibold">{testimonial.author}</div>
-                                        <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                                    <div className="mb-6 text-5xl font-bold" style={{ color: 'var(--primary-red)' }}>"</div>
+                                    <p className="mb-6 text-muted-foreground leading-relaxed">{testimonial.quote}</p>
+                                    <div className="flex items-center gap-3">
+                                        <div 
+                                            className="flex h-12 w-12 items-center justify-center rounded-full font-bold text-white"
+                                            style={{ backgroundColor: 'var(--secondary-blue)' }}
+                                        >
+                                            {testimonial.author.split(' ').map(n => n[0]).join('')}
+                                        </div>
+                                        <div>
+                                            <div className="font-semibold">{testimonial.author}</div>
+                                            <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                                        </div>
                                     </div>
                                 </motion.div>
                             ))}
@@ -312,38 +625,68 @@ export function FloatingBot({ appConfig }: FloatingBotProps) {
                     <div className="mx-auto max-w-7xl">
                         <div className="grid gap-12 md:grid-cols-4">
                             <div className="md:col-span-2">
-                                <div className="mb-4 text-2xl font-bold">TechCo</div>
+                                <div className="mb-4 text-2xl font-bold">
+                                    DemisCo <span style={{ color: 'var(--secondary-blue)' }}>AI</span>
+                                </div>
                                 <p className="mb-4 text-muted-foreground">
-                                    Empowering businesses through innovative technology solutions since 2013.
+                                    Empowering individuals and businesses with intelligent AI assistants that understand, learn, and adapt to your unique needs.
                                 </p>
                                 <div className="text-sm text-muted-foreground">
-                                    <p>123 Innovation Street</p>
-                                    <p>San Francisco, CA 94105</p>
-                                    <p className="mt-2">contact@techco.example</p>
-                                    <p>+1 (555) 123-4567</p>
+                                    <p>AI Innovation Hub</p>
+                                    <p>Silicon Valley, CA</p>
+                                    <p className="mt-2">hello@demisco.ai</p>
+                                    <p>support@demisco.ai</p>
                                 </div>
                             </div>
                             <div>
-                                <h3 className="mb-4 font-semibold">Company</h3>
+                                <h3 className="mb-4 font-semibold">Product</h3>
                                 <ul className="space-y-2 text-sm text-muted-foreground">
-                                    <li><a href="#about" className="transition-colors hover:text-foreground">About Us</a></li>
-                                    <li><a href="#services" className="transition-colors hover:text-foreground">Services</a></li>
-                                    <li><a href="#" className="transition-colors hover:text-foreground">Careers</a></li>
-                                    <li><a href="#" className="transition-colors hover:text-foreground">Blog</a></li>
+                                    <li><a href="#features" className="transition-colors hover:text-primary">Features</a></li>
+                                    <li><a href="#avatar" className="transition-colors hover:text-primary">Your Avatar</a></li>
+                                    <li><a href="#" className="transition-colors hover:text-primary">Pricing</a></li>
+                                    <li><a href="#" className="transition-colors hover:text-primary">API Documentation</a></li>
                                 </ul>
                             </div>
                             <div>
                                 <h3 className="mb-4 font-semibold">Legal</h3>
                                 <ul className="space-y-2 text-sm text-muted-foreground">
-                                    <li><a href="#" className="transition-colors hover:text-foreground">Privacy Policy</a></li>
-                                    <li><a href="#" className="transition-colors hover:text-foreground">Terms of Service</a></li>
-                                    <li><a href="#" className="transition-colors hover:text-foreground">Cookie Policy</a></li>
-                                    <li><a href="#" className="transition-colors hover:text-foreground">GDPR</a></li>
+                                    <li><a href="#" className="transition-colors hover:text-primary">Privacy Policy</a></li>
+                                    <li><a href="#" className="transition-colors hover:text-primary">Terms of Service</a></li>
+                                    <li><a href="#" className="transition-colors hover:text-primary">Cookie Policy</a></li>
+                                    <li><a href="#" className="transition-colors hover:text-primary">AI Ethics</a></li>
                                 </ul>
                             </div>
                         </div>
-                        <div className="mt-12 border-t border-border pt-8 text-center text-sm text-muted-foreground">
-                            <p>© {new Date().getFullYear()} TechCo. All rights reserved.</p>
+                        <div className="mt-12 flex flex-col items-center gap-4 border-t border-border pt-8 text-center">
+                            <div className="flex gap-4">
+                                <motion.a
+                                    href="#"
+                                    className="flex h-10 w-10 items-center justify-center rounded-full transition-colors"
+                                    style={{ backgroundColor: 'var(--bg2)' }}
+                                    whileHover={{ scale: 1.1, backgroundColor: 'var(--primary-red)' }}
+                                >
+                                    <span className="text-sm">𝕏</span>
+                                </motion.a>
+                                <motion.a
+                                    href="#"
+                                    className="flex h-10 w-10 items-center justify-center rounded-full transition-colors"
+                                    style={{ backgroundColor: 'var(--bg2)' }}
+                                    whileHover={{ scale: 1.1, backgroundColor: 'var(--secondary-blue)' }}
+                                >
+                                    <span className="text-sm">in</span>
+                                </motion.a>
+                                <motion.a
+                                    href="#"
+                                    className="flex h-10 w-10 items-center justify-center rounded-full transition-colors"
+                                    style={{ backgroundColor: 'var(--bg2)' }}
+                                    whileHover={{ scale: 1.1, backgroundColor: 'var(--primary-red)' }}
+                                >
+                                    <span className="text-sm">▶</span>
+                                </motion.a>
+                            </div>
+                            <p className="text-sm text-muted-foreground">
+                                © {new Date().getFullYear()} DemisCo AI Assistant. All rights reserved.
+                            </p>
                         </div>
                     </div>
                 </footer>
@@ -355,13 +698,27 @@ export function FloatingBot({ appConfig }: FloatingBotProps) {
                     <motion.button
                         onClick={handleToggle}
                         className={cn(
-                            'flex h-18 w-18 items-center justify-center rounded-full shadow-lg transition-colors overflow-hidden border-2 border-white',
+                            'flex h-18 w-18 items-center justify-center rounded-full shadow-2xl transition-all overflow-hidden border-2',
                             isOpen
-                                ? 'bg-destructive text-destructive-foreground hover:bg-destructive/90'
-                                : 'bg-primary text-primary-foreground hover:bg-primary/90 animate-pulse-shine'
+                                ? 'border-border'
+                                : 'border-white'
                         )}
-                        whileHover={{ scale: 1.05 }}
+                        style={{
+                            backgroundColor: isOpen ? 'var(--primary-red)' : 'var(--primary-red)',
+                            boxShadow: isOpen 
+                                ? '0 10px 40px rgba(239, 59, 86, 0.5)' 
+                                : '0 10px 40px rgba(239, 59, 86, 0.6)',
+                        }}
+                        whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.95 }}
+                        animate={!isOpen ? {
+                            boxShadow: [
+                                '0 10px 40px rgba(239, 59, 86, 0.6)',
+                                '0 10px 50px rgba(239, 59, 86, 0.8)',
+                                '0 10px 40px rgba(239, 59, 86, 0.6)',
+                            ],
+                        } : {}}
+                        transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
                         aria-label={isOpen ? 'Close chat' : 'Open chat'}
                     >
                         <AnimatePresence mode="wait" initial={false}>
@@ -372,6 +729,7 @@ export function FloatingBot({ appConfig }: FloatingBotProps) {
                                     animate={{ rotate: 0, opacity: 1 }}
                                     exit={{ rotate: 90, opacity: 0 }}
                                     transition={{ duration: 0.2 }}
+                                    className="text-white"
                                 >
                                     <X size={28} weight="bold" />
                                 </motion.div>
@@ -394,10 +752,13 @@ export function FloatingBot({ appConfig }: FloatingBotProps) {
                         </AnimatePresence>
                     </motion.button>
                     {!isOpen && (
-                        <div className="pointer-events-none absolute right-full top-1/2 mr-3 -translate-y-1/2 whitespace-nowrap rounded-md bg-gray-900 px-3 py-1.5 text-xs font-medium text-white shadow-lg opacity-0 group-hover:opacity-100 transition-opacity dark:bg-gray-700">
-                            Ask a question!
-                            <div className="absolute left-full top-1/2 -ml-1 h-2 w-2 -translate-y-1/2 rotate-45 bg-gray-900 dark:bg-gray-700" />
-                        </div>
+                        <motion.div 
+                            className="pointer-events-none absolute right-full top-1/2 mr-3 -translate-y-1/2 whitespace-nowrap rounded-lg px-4 py-2 text-sm font-medium text-white shadow-xl opacity-0 group-hover:opacity-100 transition-opacity"
+                            style={{ backgroundColor: 'var(--secondary-blue)' }}
+                        >
+                            Chat with DemisCo AI!
+                            <div className="absolute left-full top-1/2 -ml-1 h-3 w-3 -translate-y-1/2 rotate-45" style={{ backgroundColor: 'var(--secondary-blue)' }} />
+                        </motion.div>
                     )}
                 </div>
             </div>
