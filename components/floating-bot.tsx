@@ -134,9 +134,13 @@ export function FloatingBot({ appConfig }: FloatingBotProps) {
                             We help businesses innovate and grow with cutting-edge technology solutions tailored to your unique needs.
                         </p>
                         <motion.button
-                            whileHover={{ scale: 1.05 }}
+                            whileHover={{ scale: 1.05, backgroundColor: '#29B6F6' }}
                             whileTap={{ scale: 0.95 }}
-                            className="rounded-full bg-primary px-8 py-4 text-lg font-semibold text-primary-foreground shadow-lg transition-all hover:bg-primary/90"
+                            className="rounded-full px-8 py-4 text-lg font-semibold shadow-lg transition-all"
+                            style={{
+                                backgroundColor: '#4FC3F7',
+                                color: '#FFFFFF',
+                            }}
                         >
                             Get Started Today
                         </motion.button>
