@@ -20,6 +20,7 @@ export const StaticAvatar = ({
             ref={ref}
             className={cn(
                 'relative flex items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg transition-all duration-500',
+                'aspect-square', // Ensure perfect circle
                 className
             )}
         >

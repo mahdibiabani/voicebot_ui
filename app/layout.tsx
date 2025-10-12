@@ -70,7 +70,6 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         {styles && <style>{styles}</style>}
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
-        <link rel="icon" type="image/svg+xml" href="/demis2.svg" />
         <link rel="icon" type="image/png" href="/demis2.png" />
         <link rel="apple-touch-icon" href="/demis2.png" />
         <ApplyThemeScript />

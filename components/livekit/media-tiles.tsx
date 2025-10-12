@@ -2,7 +2,6 @@ import { cn } from '@/lib/utils';
 import {
   type TrackReference,
   useLocalParticipant,
-  useTracks,
   useVoiceAssistant,
 } from '@livekit/components-react';
 import { Track } from 'livekit-client';
@@ -99,12 +98,10 @@ export function MediaTiles({ chatOpen, isPopupMode = false }: MediaTilesProps) {
     audioTrack: agentAudioTrack,
     videoTrack: agentVideoTrack,
   } = useVoiceAssistant();
-  const [screenShareTrack] = useTracks([Track.Source.ScreenShare]);
   const cameraTrack: TrackReference | undefined = useLocalTrackRef(Track.Source.Camera);
 
   const isCameraEnabled = cameraTrack && !cameraTrack.publication.isMuted;
-  const isScreenShareEnabled = screenShareTrack && !screenShareTrack.publication.isMuted;
-  const hasSecondTile = isCameraEnabled || isScreenShareEnabled;
+  const hasSecondTile = isCameraEnabled;
 
   const transition = {
     ...animationProps.transition,
@@ -149,7 +146,9 @@ export function MediaTiles({ chatOpen, isPopupMode = false }: MediaTilesProps) {
             state={agentState}
             className={cn(
               'overflow-hidden rounded-full',
-              chatOpen ? 'h-48 w-48' : 'h-[400px] w-[400px]'
+              chatOpen 
+                ? 'h-48 w-48' 
+                : 'h-[280px] w-[280px] max-h-[70vw] max-w-[70vw] md:h-[400px] md:w-[400px] md:max-h-none md:max-w-none'
             )}
           />
         )}
@@ -176,7 +175,7 @@ export function MediaTiles({ chatOpen, isPopupMode = false }: MediaTilesProps) {
               'overflow-hidden rounded-full',
               chatOpen
                 ? 'h-48 w-48 [&>video]:h-48 [&>video]:w-48 [&>video]:object-cover'
-                : 'h-[400px] w-[400px] [&>video]:h-[400px] [&>video]:w-[400px] [&>video]:object-cover'
+                : 'h-[280px] w-[280px] max-h-[70vw] max-w-[70vw] md:h-[400px] md:w-[400px] md:max-h-none md:max-w-none [&>video]:h-full [&>video]:w-full [&>video]:object-cover'
             )}
           />
         )}
@@ -264,21 +263,6 @@ export function MediaTiles({ chatOpen, isPopupMode = false }: MediaTilesProps) {
                   layoutId="camera"
                   {...animationProps}
                   trackRef={cameraTrack}
-                  transition={{
-                    ...animationProps.transition,
-                    delay: chatOpen ? 0 : 0.15,
-                  }}
-                  className="h-[90px]"
-                />
-              )}
-              {/* screen */}
-              {isScreenShareEnabled && (
-                <MotionVideoTile
-                  key="screen"
-                  layout="position"
-                  layoutId="screen"
-                  {...animationProps}
-                  trackRef={screenShareTrack}
                   transition={{
                     ...animationProps.transition,
                     delay: chatOpen ? 0 : 0.15,

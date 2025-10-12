@@ -50,7 +50,6 @@ export function AgentControlBar({
     visibleControls,
     cameraToggle,
     microphoneToggle,
-    screenShareToggle,
     handleAudioDeviceChange,
     handleVideoDeviceChange,
     handleDisconnect,
@@ -165,21 +164,6 @@ export function AgentControlBar({
                     'hover:peer-data-[state=off]/track:text-destructive-foreground focus:peer-data-[state=off]/track:text-destructive-foreground',
                     'rounded-l-none',
                   ])}
-                />
-              </div>
-            </Tooltip>
-          )}
-
-          {capabilities.supportsScreenShare && visibleControls.screenShare && (
-            <Tooltip content="Share your desktop" side="top">
-              <div className="flex items-center gap-0">
-                <TrackToggle
-                  variant="secondary"
-                  source={Track.Source.ScreenShare}
-                  pressed={screenShareToggle.enabled}
-                  disabled={screenShareToggle.pending}
-                  onPressedChange={screenShareToggle.toggle}
-                  className="relative w-auto"
                 />
               </div>
             </Tooltip>

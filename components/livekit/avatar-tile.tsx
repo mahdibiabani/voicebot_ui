@@ -12,12 +12,12 @@ export const AvatarTile = ({
   ref,
 }: React.ComponentProps<'div'> & AgentAudioTileProps) => {
   return (
-    <div ref={ref} className={cn(className)}>
+    <div ref={ref} className={cn('flex items-center justify-center aspect-square', className)}>
       <VideoTrack
         trackRef={videoTrack}
         width={videoTrack?.publication.dimensions?.width ?? 0}
         height={videoTrack?.publication.dimensions?.height ?? 0}
-        className="rounded-md"
+        className="rounded-full object-cover"
       />
     </div>
   );
