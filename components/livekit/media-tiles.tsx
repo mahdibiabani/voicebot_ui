@@ -90,9 +90,10 @@ export function useLocalTrackRef(source: Track.Source) {
 interface MediaTilesProps {
   chatOpen: boolean;
   isPopupMode?: boolean;
+  onAvatarClick?: () => void;
 }
 
-export function MediaTiles({ chatOpen, isPopupMode = false }: MediaTilesProps) {
+export function MediaTiles({ chatOpen, isPopupMode = false, onAvatarClick }: MediaTilesProps) {
   const {
     state: agentState,
     audioTrack: agentAudioTrack,
@@ -137,16 +138,17 @@ export function MediaTiles({ chatOpen, isPopupMode = false }: MediaTilesProps) {
               scale: { duration: 0.3, ease: 'easeOut' },
             }}
             state={agentState}
+            onClick={onAvatarClick}
             className={cn(
               'overflow-hidden rounded-full',
-              chatOpen 
-                ? 'h-48 w-48' 
-                : 'h-[280px] w-[280px] md:h-[400px] md:w-[400px]'
+              chatOpen
+                ? 'h-48 w-48'
+                : 'h-[240px] w-[240px] md:h-[400px] md:w-[400px]'
             )}
             style={{
               willChange: 'transform',
-              maxWidth: chatOpen ? undefined : 'min(280px, 70vw)',
-              maxHeight: chatOpen ? undefined : 'min(280px, 70vw)',
+              maxWidth: chatOpen ? undefined : 'min(240px, 65vw)',
+              maxHeight: chatOpen ? undefined : 'min(240px, 65vw)',
             }}
           />
         )}
@@ -162,16 +164,17 @@ export function MediaTiles({ chatOpen, isPopupMode = false }: MediaTilesProps) {
               scale: { duration: 0.3, ease: 'easeOut' },
             }}
             videoTrack={agentVideoTrack}
+            onClick={onAvatarClick}
             className={cn(
               'overflow-hidden rounded-full',
               chatOpen
                 ? 'h-48 w-48 [&>video]:h-48 [&>video]:w-48 [&>video]:object-cover'
-                : 'h-[280px] w-[280px] md:h-[400px] md:w-[400px] [&>video]:h-full [&>video]:w-full [&>video]:object-cover'
+                : 'h-[240px] w-[240px] md:h-[400px] md:w-[400px] [&>video]:h-full [&>video]:w-full [&>video]:object-cover'
             )}
             style={{
               willChange: 'transform',
-              maxWidth: chatOpen ? undefined : 'min(280px, 70vw)',
-              maxHeight: chatOpen ? undefined : 'min(280px, 70vw)',
+              maxWidth: chatOpen ? undefined : 'min(240px, 65vw)',
+              maxHeight: chatOpen ? undefined : 'min(240px, 65vw)',
             }}
           />
         )}
@@ -235,6 +238,7 @@ export function MediaTiles({ chatOpen, isPopupMode = false }: MediaTilesProps) {
                   animate={avatarAnimate}
                   transition={avatarLayoutTransition}
                   videoTrack={agentVideoTrack}
+                  onClick={onAvatarClick}
                   className={cn(
                     chatOpen ? 'h-[90px] [&>video]:h-[90px] [&>video]:w-auto' : 'h-auto w-full'
                   )}

@@ -191,7 +191,7 @@ export const SessionView = ({
               className="absolute bottom-4 left-0 right-0 z-10 text-center text-xs text-muted-foreground"
             >
               <p className="animate-text-shimmer inline-block !bg-clip-text font-semibold text-transparent">
-                {isLoading ? 'Loading...' : 'Agent is listening, ask it a question and start going!'}
+                {isLoading ? 'Initializing a new session...' : 'Agent is listening, ask it a question and start going!'}
               </p>
             </motion.div>
           )}
@@ -288,7 +288,7 @@ export const SessionView = ({
                 )}
               >
                 <p className="animate-text-shimmer inline-block !bg-clip-text text-sm font-semibold text-transparent">
-                  {isLoading ? 'Loading...' : 'Agent is listening, ask it a question and start going!'}
+                  {isLoading ? 'Initializing a new session...' : 'Agent is listening, ask it a question and start going!'}
                 </p>
               </motion.div>
             )}

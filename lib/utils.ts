@@ -47,6 +47,7 @@ export const getAppConfig = cache(async (headers: Headers): Promise<AppConfig> =
       const response = await fetch(CONFIG_ENDPOINT, {
         cache: 'no-store',
         headers: { 'X-Sandbox-ID': sandboxId },
+        signal: AbortSignal.timeout(5000), // 5 second timeout
       });
 
       const remoteConfig: SandboxConfig = await response.json();
@@ -70,6 +71,8 @@ export const getAppConfig = cache(async (headers: Headers): Promise<AppConfig> =
       return config;
     } catch (error) {
       console.error('ERROR: getAppConfig() - lib/utils.ts', error);
+      // Return default config immediately on error
+      return APP_CONFIG_DEFAULTS;
     }
   }
 

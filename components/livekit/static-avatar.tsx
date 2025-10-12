@@ -5,11 +5,13 @@ import { Robot } from '@phosphor-icons/react/dist/ssr';
 interface StaticAvatarProps {
     state: AgentState;
     className?: string;
+    onClick?: () => void;
 }
 
 export const StaticAvatar = ({
     state,
     className,
+    onClick,
     ref,
 }: React.ComponentProps<'div'> & StaticAvatarProps) => {
     const isActive = state === 'listening' || state === 'speaking' || state === 'thinking';
@@ -18,9 +20,11 @@ export const StaticAvatar = ({
     return (
         <div
             ref={ref}
+            onClick={onClick}
             className={cn(
                 'relative flex items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg',
                 'aspect-square', // Ensure perfect circle
+                onClick && 'cursor-pointer hover:scale-105 transition-transform duration-200',
                 className
             )}
             style={{
