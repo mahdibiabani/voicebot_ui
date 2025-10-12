@@ -19,10 +19,14 @@ export const StaticAvatar = ({
         <div
             ref={ref}
             className={cn(
-                'relative flex items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg transition-all duration-500',
+                'relative flex items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg',
                 'aspect-square', // Ensure perfect circle
                 className
             )}
+            style={{
+                backfaceVisibility: 'hidden',
+                WebkitBackfaceVisibility: 'hidden',
+            }}
         >
             {/* Subtle shine effect */}
             <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent" />

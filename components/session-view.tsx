@@ -162,9 +162,14 @@ export const SessionView = ({
             }}
             transition={{
               type: 'spring',
-              stiffness: 260,
-              damping: 28,
-              mass: 0.8,
+              stiffness: 200,
+              damping: 35,
+              mass: 0.5,
+              restSpeed: 0.01,
+              restDelta: 0.01,
+            }}
+            style={{
+              willChange: 'transform',
             }}
           >
             <MediaTiles chatOpen={chatOpen} isPopupMode={isPopupMode} />

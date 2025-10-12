@@ -12,7 +12,14 @@ export const AvatarTile = ({
   ref,
 }: React.ComponentProps<'div'> & AgentAudioTileProps) => {
   return (
-    <div ref={ref} className={cn('flex items-center justify-center aspect-square', className)}>
+    <div 
+      ref={ref} 
+      className={cn('flex items-center justify-center aspect-square', className)}
+      style={{
+        backfaceVisibility: 'hidden',
+        WebkitBackfaceVisibility: 'hidden',
+      }}
+    >
       <VideoTrack
         trackRef={videoTrack}
         width={videoTrack?.publication.dimensions?.width ?? 0}

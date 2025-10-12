@@ -129,54 +129,50 @@ export function MediaTiles({ chatOpen, isPopupMode = false }: MediaTilesProps) {
           // Static avatar for audio-only agent in popup mode
           <MotionStaticAvatar
             key="avatar-popup"
-            layout
-            layoutId="avatar-popup"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{
-              layout: {
-                type: 'spring',
-                stiffness: 300,
-                damping: 30,
-              },
               opacity: { duration: 0.3 },
-              scale: { duration: 0.3 },
+              scale: { duration: 0.3, ease: 'easeOut' },
             }}
             state={agentState}
             className={cn(
               'overflow-hidden rounded-full',
               chatOpen 
                 ? 'h-48 w-48' 
-                : 'h-[280px] w-[280px] max-h-[70vw] max-w-[70vw] md:h-[400px] md:w-[400px] md:max-h-none md:max-w-none'
+                : 'h-[280px] w-[280px] md:h-[400px] md:w-[400px]'
             )}
+            style={{
+              willChange: 'transform',
+              maxWidth: chatOpen ? undefined : 'min(280px, 70vw)',
+              maxHeight: chatOpen ? undefined : 'min(280px, 70vw)',
+            }}
           />
         )}
         {isAvatar && (
           // avatar agent
           <MotionAvatarTile
             key="avatar-popup"
-            layout
-            layoutId="avatar-popup"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{
-              layout: {
-                type: 'spring',
-                stiffness: 300,
-                damping: 30,
-              },
               opacity: { duration: 0.3 },
-              scale: { duration: 0.3 },
+              scale: { duration: 0.3, ease: 'easeOut' },
             }}
             videoTrack={agentVideoTrack}
             className={cn(
               'overflow-hidden rounded-full',
               chatOpen
                 ? 'h-48 w-48 [&>video]:h-48 [&>video]:w-48 [&>video]:object-cover'
-                : 'h-[280px] w-[280px] max-h-[70vw] max-w-[70vw] md:h-[400px] md:w-[400px] md:max-h-none md:max-w-none [&>video]:h-full [&>video]:w-full [&>video]:object-cover'
+                : 'h-[280px] w-[280px] md:h-[400px] md:w-[400px] [&>video]:h-full [&>video]:w-full [&>video]:object-cover'
             )}
+            style={{
+              willChange: 'transform',
+              maxWidth: chatOpen ? undefined : 'min(280px, 70vw)',
+              maxHeight: chatOpen ? undefined : 'min(280px, 70vw)',
+            }}
           />
         )}
         {/* Camera in popup mode - show as small circle when chat is closed */}
