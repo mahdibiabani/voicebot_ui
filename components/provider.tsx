@@ -15,7 +15,11 @@ export function Provider({
   children: React.ReactNode;
 }) {
   const { connectionDetails } = useConnectionDetails(appConfig);
-  const room = React.useMemo(() => new Room(), []);
+  const room = React.useMemo(() => new Room({
+    wsHeaders: {
+      'X-Frame-Options': 'ALLOWALL',
+    }
+  }), []);
 
   React.useEffect(() => {
     if (room.state === 'disconnected' && connectionDetails) {
