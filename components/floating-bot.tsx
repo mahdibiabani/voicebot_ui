@@ -65,7 +65,11 @@ function AvatarSlideshow() {
 }
 
 export function FloatingBot({ appConfig }: { appConfig: AppConfig }) {
-  const room = useMemo(() => new Room(), []);
+  const room = useMemo(() => new Room({
+    wsHeaders: {
+      'X-Frame-Options': 'ALLOWALL',
+    }
+  }), []);
   const [isOpen, setIsOpen] = useState(false);
   const [sessionStarted, setSessionStarted] = useState(false);
   const [selectedVoice, setSelectedVoice] = useState(appConfig.defaultTTSVoice || '');
@@ -129,8 +133,11 @@ export function FloatingBot({ appConfig }: { appConfig: AppConfig }) {
     if (!isOpen) {
       setIsOpen(true);
       if (!sessionStarted) setSessionStarted(true);
+      // Send message to parent window when opening the assistant
+      window.parent.postMessage({ type: 'assistant', action: 'open' }, '*');
     } else {
       setIsOpen(false);
+      window.parent.postMessage({ type: 'assistant', action: 'close' }, '*');
     }
   };
 
