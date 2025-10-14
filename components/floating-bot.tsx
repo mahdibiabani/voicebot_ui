@@ -73,8 +73,18 @@ export function FloatingBot({ appConfig }: { appConfig: AppConfig }) {
   const [isOpen, setIsOpen] = useState(false);
   const [sessionStarted, setSessionStarted] = useState(false);
   const [selectedVoice, setSelectedVoice] = useState('');
+  const [isMediaSupported, setIsMediaSupported] = useState(false);
   const { refreshConnectionDetails, existingOrRefreshConnectionDetails } =
     useConnectionDetails(appConfig);
+
+  // Check media device support after hydration
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setIsMediaSupported(
+        !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
+      );
+    }
+  }, []);
 
   // Set default voice after hydration to prevent mismatch
   useEffect(() => {
@@ -106,10 +116,25 @@ export function FloatingBot({ appConfig }: { appConfig: AppConfig }) {
   useEffect(() => {
     let aborted = false;
     if (sessionStarted && room.state === 'disconnected') {
+      // Check if media devices are available before trying to enable microphone
+      const enableMicrophone = async () => {
+        try {
+          // Check if getUserMedia is available
+          if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+            throw new Error('Media devices not supported in this browser');
+          }
+          
+          await room.localParticipant.setMicrophoneEnabled(true, undefined, {
+            preConnectBuffer: appConfig.isPreConnectBufferEnabled,
+          });
+        } catch (error) {
+          console.warn('Failed to enable microphone:', error);
+          // Continue without microphone if it fails
+        }
+      };
+
       Promise.all([
-        room.localParticipant.setMicrophoneEnabled(true, undefined, {
-          preConnectBuffer: appConfig.isPreConnectBufferEnabled,
-        }),
+        enableMicrophone(),
         existingOrRefreshConnectionDetails().then((connectionDetails) =>
           room.connect(connectionDetails.serverUrl, connectionDetails.participantToken)
         ),
@@ -255,11 +280,21 @@ export function FloatingBot({ appConfig }: { appConfig: AppConfig }) {
               }}
             >
               <RoomContext.Provider value={room}>
-                <RoomAudioRenderer />
-                <StartAudio label="Start Audio" />
+                {isMediaSupported && <RoomAudioRenderer />}
+                {isMediaSupported && <StartAudio label="Start Audio" />}
+                {!isMediaSupported && (
+                  <div className="flex items-center justify-center h-full p-8">
+                    <div className="text-center">
+                      <h3 className="text-lg font-semibold mb-2">Media Not Supported</h3>
+                      <p className="text-muted-foreground">
+                        Your browser doesn't support media devices. Please use a modern browser with microphone access.
+                      </p>
+                    </div>
+                  </div>
+                )}
                 <SessionView
                   appConfig={appConfig}
-                  disabled={!sessionStarted}
+                  disabled={!sessionStarted || !isMediaSupported}
                   sessionStarted={sessionStarted}
                   isPopupMode={true}
                   selectedVoice={selectedVoice}
