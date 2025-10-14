@@ -51,7 +51,10 @@ export default function useConnectionDetails(appConfig: AppConfig) {
   }, []);
 
   useEffect(() => {
-    fetchConnectionDetails();
+    // Only fetch connection details on the client side to prevent hydration issues
+    if (typeof window !== 'undefined') {
+      fetchConnectionDetails();
+    }
   }, [fetchConnectionDetails]);
 
   const isConnectionDetailsExpired = useCallback(() => {

@@ -72,9 +72,16 @@ export function FloatingBot({ appConfig }: { appConfig: AppConfig }) {
   }), []);
   const [isOpen, setIsOpen] = useState(false);
   const [sessionStarted, setSessionStarted] = useState(false);
-  const [selectedVoice, setSelectedVoice] = useState(appConfig.defaultTTSVoice || '');
+  const [selectedVoice, setSelectedVoice] = useState('');
   const { refreshConnectionDetails, existingOrRefreshConnectionDetails } =
     useConnectionDetails(appConfig);
+
+  // Set default voice after hydration to prevent mismatch
+  useEffect(() => {
+    if (appConfig.defaultTTSVoice) {
+      setSelectedVoice(appConfig.defaultTTSVoice);
+    }
+  }, [appConfig.defaultTTSVoice]);
 
   useEffect(() => {
     const onDisconnected = () => {
